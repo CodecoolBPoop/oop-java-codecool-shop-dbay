@@ -8,6 +8,9 @@ public class BaseModel {
     protected int id;
     protected String name;
     protected String description;
+    protected int bhp;
+    protected int acceleration;
+
 
     public BaseModel(String name) {
         this.name = name;
