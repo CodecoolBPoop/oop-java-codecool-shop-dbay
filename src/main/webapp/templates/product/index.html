@@ -5,7 +5,9 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Codecool Shop</title>
+    <title>cBay</title>
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -31,34 +33,51 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h1>cBay</h1>
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+    <div th:switch="${elements}" class="type">
+        <div th:case="'products'" class="categories-name">
+            <strong th:text="${category.name}">Category Title</strong>
+        </div>
+        <div th:case="'categories'" class="categories-name">
+            <strong class="category-card" th:text="'Categories'">Category Title</strong>
+        </div>
     </div>
-
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+    <div th:switch="${elements}" class="type">
+        <div th:case="'products'" id="products" class="row">
+            <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                <div class="card">
+                    <img class="product-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/products/' + ${style} +'_' + ${prod.name} + '.jpg'" alt="" />
+                    <div class="card-header">
+                        <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                        <p class="card-text" th:text="${prod.description}">Product description... </p>
                     </div>
-                    <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        </div>
+                        <div class="card-text">
+                            <a class="btn btn-success" href="#">Add to cart</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div th:case="'categories'" id="products" class="row">
+            <div class="col-lg-3" th:each="categ : ${categoriesArray}">
+                <a class="category-link" href="/" th:attr="href='/products?style=' + ${categ}">
+                    <div class="card">
+                        <img class="category-picture" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/categories/' + ${categ} +'.svg'" alt="" />
+                        <div class="card-header">
+                            <h4 class="card-title" th:text="${categ}">Product name</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
-
 </div>
 
 <div th:replace="footer.html :: copy"></div>
