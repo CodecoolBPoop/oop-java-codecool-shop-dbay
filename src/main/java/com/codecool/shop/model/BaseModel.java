@@ -60,4 +60,6 @@ public class BaseModel {
     public void setDescription(String description) {
         this.description = description;
     }
+    public void setBhp(int bhp) { this.bhp = bhp; }
+    public void setAcceleration(int acceleration) { this.acceleration = acceleration; }
 }
