@@ -9,16 +9,20 @@ public class BaseModel {
     protected String name;
     protected String description;
     protected int bhp;
-    protected int acceleration;
+    protected double acceleration;
+    protected int modelYear;
 
 
     public BaseModel(String name) {
         this.name = name;
     }
 
-    public BaseModel(String name, String description) {
+    public BaseModel(String name, String description, double acceleration, int bhp, int modelYear) {
         this.name = name;
         this.description = description;
+        this.bhp = bhp;
+        this.acceleration = acceleration;
+        this.modelYear = modelYear;
     }
 
 
@@ -50,6 +54,9 @@ public class BaseModel {
     public String getDescription() {
         return description;
     }
+    public int getModelYear() { return modelYear; }
+    public double getAcceleration() { return acceleration; }
+    public int getBhp() { return bhp; }
     // SETTERS
     public void setId(int id) {
         this.id = id;
@@ -60,6 +67,7 @@ public class BaseModel {
     public void setDescription(String description) {
         this.description = description;
     }
+    public void setModelYear(int modelYear) { this.modelYear = modelYear; }
     public void setBhp(int bhp) { this.bhp = bhp; }
     public void setAcceleration(int acceleration) { this.acceleration = acceleration; }
 }
