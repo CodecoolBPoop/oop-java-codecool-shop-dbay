@@ -5,7 +5,7 @@ import com.codecool.shop.model.ShoppingCart;
 
 public interface ShoppingCartDao {
 
-    void createShoppingCart(String sessionId);
+    ShoppingCart createShoppingCart(String sessionId);
 
     void deleteShoppingCart(String sessionId);
 
