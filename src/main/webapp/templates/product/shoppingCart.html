@@ -48,12 +48,12 @@
             </tr>
             </thead>
             <tbody>
-                <tr class="row" th:each="item,iterStat : ${cartItems}">
-                    <td class="col" th:text="${item}"></td>
-                    <td class="col"></td>
+                <tr class="row" th:each="item,iterStat : ${cartItems.getShoppingCart()}">
+                    <td class="col" th:text="${item.getProduct().getName()}"></td>
+                    <td class="col" th:text="${item.getQuantity()}"></td>
                     <td class="col-md-2"><a href="/shopping-cart"><i class="fas fa-plus-circle"></i></a></td>
                     <td class="col-md-2"><a href="/shopping-cart"><i class="fas fa-minus-circle"></i></a></td>
-                    <td class="col-md-2" th:text="${item}"></td>
+                    <td class="col-md-2" th:text="${item.getProduct().getPrice()}"></td>
                 </tr>
             </tbody>
         </table>
