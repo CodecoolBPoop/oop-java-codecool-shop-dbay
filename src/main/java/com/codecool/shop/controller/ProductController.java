@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.StandardEngineContextFactory;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +41,29 @@ public class ProductController extends HttpServlet {
 //        context.setVariables(params);
         String[] categoriesArray = {"Crossovers", "Hatchbacks", "Sedans", "Convertibles", "Vans", "Trucks", "Minivans", "Sport cars"};
 
+        // Get elements for the dropdown list.
+        List<Product> allProducts = productDataStore.getAll();
+        ArrayList<String> dropdownElements = getDropdownElements(style, allProducts);
+
+        // Set template engine.
         context.setVariable("recipient", "World");
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getAll());
         context.setVariable("elements", elements);
         context.setVariable("style", style);
         context.setVariable("categoriesArray", categoriesArray);
+        context.setVariable("dropdown", dropdownElements);
         engine.process("product/index.html", context, resp.getWriter());
+    }
+
+    private ArrayList<String> getDropdownElements(String style, List<Product> allProducts) {
+        ArrayList<String> dropdownElements = new ArrayList<>();
+        for (Product product: allProducts) {
+            if (product.getProductCategory().getName().equals(style)) {
+                if (!dropdownElements.contains(product.getSupplier().getName()))
+                    dropdownElements.add(product.getSupplier().getName());
+            }
+        }
+        return dropdownElements;
     }
 }

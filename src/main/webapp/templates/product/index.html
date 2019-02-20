@@ -9,6 +9,8 @@
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
 
+    <!--JavaScript-->
+    <script src="static/script/script.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -39,7 +41,14 @@
 <div class="container">
     <div th:switch="${elements}" class="type">
         <div th:case="'products'" class="categories-name">
-            <strong th:text="${style}">Category Title</strong>
+            <strong th:text="${style}">Category Title</strong><br>
+            <select name="filter" id="filter-supplier">
+                <option value="Filter" selected="selected" disabled hidden>Filter</option>
+                <option value="All">All</option>
+                <th:block th:each="supplier : ${dropdown}" >
+                    <option class="options" th:value="${supplier}" value="1" th:text="${supplier}">1</option>
+                </th:block>
+            </select>
         </div>
         <div th:case="'categories'" class="categories-name">
             <strong class="category-card" th:text="'Categories'">Category Title</strong>
@@ -47,7 +56,7 @@
     </div>
     <div th:switch="${elements}" class="type">
         <div th:case="'products'" id="products" class="row">
-            <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}" th:if="${prod.productCategory.getName()} == ${style}">
+            <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}" th:if="${prod.productCategory.getName()} == ${style}" th:attr="data-name=${prod.supplier.getName()}">
                 <div class="card">
                     <img class="product-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/products/' + ${style} +'_' + ${prod.name} + '.jpg'" alt="" />
                     <div class="card-header">
@@ -58,14 +67,24 @@
                         <b th:text="${prod.bhp}" >Product bhp...</b><br>
                         <span th:text="'0-60 mph: '">Product acceleration...</span>
                         <b th:text="${prod.acceleration}">Product acceleration...</b>
-                        <span th:text="' seconds'">Product acceleration...</span>
+                        <span th:text="' seconds'">Product acceleration...</span><br>
+                        <span th:text="'Top speed: '">Product top speed...</span>
+                        <b th:text="${prod.topSpeed}">Product top speed...</b>
+                        <span th:text="' mph'">Product top speed...</span>
                     </div>
                     <div class="card-body">
-                        <div class="card-text">
+                        <div th:attr="data-price=${prod.getPrice().substring(0, prod.getPrice().length() - 4)}" class="card-text">
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="card-text">
                             <a class="btn btn-success" href="#">Add to cart</a>
+                            <select name="qty" class="quantity">
+                                <option class="options" value="1">1</option>
+                                <option class="options" value="2">2</option>
+                                <option class="options" value="3">3</option>
+                                <option class="options" value="4">4</option>
+                                <option class="options" value="5">5</option>
+                            </select>
                         </div>
                     </div>
                 </div>

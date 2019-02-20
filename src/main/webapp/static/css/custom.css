@@ -74,6 +74,9 @@
 .card-title {
     text-align: center;
 }
+.quantity {
+    float: right;
+}
 .product-image {
     max-width: 100%;
     max-height: 100%;
@@ -82,6 +85,8 @@
     margin: 10px 0;
 }
 .btn-success {
+    font-weight: bold;
+    border: 0;
     background-color: darkslategray;
 }
 .btn-success:hover {
@@ -101,9 +106,32 @@ a:hover {
     color: black;
     text-decoration: none;
 }
+select {
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 5px;
+    background-color: #b0b0b0;
+    border-radius: 5px;
+    border: 0;
+}
+select:focus {
+    outline-width: 0;
+}
+option, option:hover {
+    outline: 0;
+    background-color: #b0b0b0;
+    font-weight: bold;
+}
 .card-text {
     margin: -5px;
 }
 .card:hover {
-    background-color: lightgrey;
+    background-color: #ececec;
+}
+.display-on {
+    display: block;
+}
+.display-off {
+    display: none;
 }
