@@ -17,6 +17,9 @@ public class Product extends BaseModel {
         this.setProductCategory(productCategory);
     }
 
+    public Product() {
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +

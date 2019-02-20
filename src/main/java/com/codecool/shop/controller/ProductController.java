@@ -2,9 +2,12 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -13,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +40,15 @@ public class ProductController extends HttpServlet {
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         engine.process("product/index.html", context, resp.getWriter());
+    }
+
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int productId = Integer.parseInt(req.getParameter("addProduct"));
+        HttpSession session = req.getSession(true);
+        String sessionId = session.getId();
+        Product product = ProductDaoMem.getInstance().find(productId);
+        ShoppingCartDaoMem.getInstance().addToShoppingCart(sessionId, product);
+        resp.sendRedirect("/");
     }
 
 }
