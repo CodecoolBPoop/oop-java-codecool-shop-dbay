@@ -60,3 +60,18 @@
 {
     margin: 0 0 11px;
 }
+
+body {
+    height: 700px;
+}
+
+.header-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../web_image/website-header.jpg');
+
+    height: 50%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
