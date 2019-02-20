@@ -2,6 +2,23 @@
 function init() {
     initialiseDropdown();
     initialiseAddToCartBtn();
+    initialiseCartNumber();
+    //wipeLocalStorage();
+}
+///// CARD NUMBER /////
+function initialiseCartNumber() {
+    const number = document.getElementById("shopping-cart-number");
+    if (window.localStorage.getItem("cartNumber") === null) {
+        window.localStorage.setItem("cartNumber", "");
+    }
+    if (number.textContent !== null) {
+        number.textContent = window.localStorage.getItem("cartNumber");
+    }
+}
+function wipeLocalStorage() {
+    window.localStorage.clear();
+    const number = document.getElementById("shopping-cart-number");
+    number.textContent = '';
 }
 
 ///// SHOPPING CART /////
@@ -20,11 +37,12 @@ function addQuantityToCart(btn) {
     const select = btn.nextElementSibling;
     const quantityNumber = select.options[select.selectedIndex].text;
     let cartNumber = document.getElementById("shopping-cart-number");
-    if (cartNumber.textContent === null) {
+    if (cartNumber.textContent === null || cartNumber.textContent === '') {
         cartNumber.textContent = '0';
     }
     let newNumber = Number(cartNumber.innerText) + Number(quantityNumber);
-    cartNumber.innerText = String(newNumber);
+    window.localStorage.setItem('cartNumber', String(newNumber));
+    cartNumber.innerText = window.localStorage.getItem('cartNumber');
 }
 
 
