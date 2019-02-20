@@ -95,6 +95,7 @@ public class Initializer implements ServletContextListener {
             case "Hatchbacks":
                 vehicles.put("Honda", new String[] {"Civic Type R"});
                 vehicles.put("Volkswagen", new String[] {"Golf GTI", "Scirocco R", "Polo"});
+                vehicles.put("Ferrari", new String[] {"FF"});
                 vehicles.put("Ford", new String[] {"Focus RS", "Fiesta"});
                 vehicles.put("Toyota", new String[] {"Corolla XSE"});
                 vehicles.put("Mazda", new String[] {"3"});
@@ -104,7 +105,8 @@ public class Initializer implements ServletContextListener {
             case "Sedans":
                 vehicles.put("Aston Martin", new String[] {"DB11", "DB4", "DB9"});
                 vehicles.put("Jaguar", new String[] {"XF", "XJ"});
-                vehicles.put("Lamborghini", new String[] {"Estoque", "Huracan"});
+                vehicles.put("Lamborghini", new String[] {"Estoque"});
+                vehicles.put("Dodge", new String[] {"Charger SRT"});
                 vehicles.put("Lexus", new String[] {"LS 500 Sport", "LS 500h"});
                 vehicles.put("Mercedes Benz", new String[] {"A-Class", "E300"});
                 vehicles.put("Rolls-Royce", new String[] {"Phantom", "Silver Ghost", "Ghost"});
@@ -141,6 +143,7 @@ public class Initializer implements ServletContextListener {
                 vehicles.put("Pagani", new String[] {"Huayra"});
                 vehicles.put("Porsche", new String[] {"911 GT3", "918"});
                 vehicles.put("Ford", new String[] {"GT"});
+                vehicles.put("Lamborghini", new String[] {"Huracan"});
                 vehicles.put("Koenigsegg", new String[] {"Regera"});
                 vehicles.put("Zenvo", new String[] {"ST1"});
                 vehicles.put("Saleen", new String[] {"S7"});
@@ -155,7 +158,7 @@ public class Initializer implements ServletContextListener {
                                   "Hummer", "Lincoln", "Aston Martin", "Lexus", "Maybach", "Ford", "Dodge", "Toyota",
                                   "Nissan", "Chrysler", "Kia", "Spyker", "Honda", "Mazda", "BMW", "Citroen", "Peugeot",
                                   "Bugatti","Ferrari", "Pagani", "Porsche", "Koenigsegg", "Zenvo", "Saleen", "Volkswagen",
-                                  "Hyundai"};
+                                  "Hyundai", "Dodge"};
         for (String name: supplierNames) {
             Supplier supplier = new Supplier(name, "Placeholder");
             suppliers.add(supplier);
@@ -197,7 +200,7 @@ public class Initializer implements ServletContextListener {
         descriptions.put("XF", new double[] {155, 5.1, 374, 2015, 58900});
         descriptions.put("XJ", new double[] {174, 4.2, 566, 2010, 75700});
         descriptions.put("Estoque", new double[] {200, 2.9, 560, 2008, 230000});
-        descriptions.put("Huracan", new double[] {201, 2.3, 631, 2018, 274390});
+        descriptions.put("Charger SRT", new double[] {175, 4.2, 485, 2019, 29220});
         descriptions.put("LS 500 Sport", new double[] {157, 4.5, 416, 2018, 115675});
         descriptions.put("LS 500h", new double[] {136, 5.3, 354, 2018, 81300});
         descriptions.put("A-Class", new double[] {139, 4.5, 301, 2019, 33495});
@@ -228,11 +231,12 @@ public class Initializer implements ServletContextListener {
         descriptions.put("Polo", new double[] {105, 14.6, 89, 2018, 19500});
         descriptions.put("Focus RS", new double[] {165, 4.7, 345, 2017, 40500});
         descriptions.put("Fiesta", new double[] {125, 8.6, 138, 2019, 27490});
-        descriptions.put("Corolla XSE", new double[] {110, 7.5, 175, 2019, 25020});
+        descriptions.put("Corolla XSE", new double[] {110, 7.5, 175, 2019, 25000});
         descriptions.put("3", new double[] {120, 10.1, 120, 2019, 23100});
         descriptions.put("Sonic RS", new double[] {108, 7.6, 138, 2019, 17185});
         descriptions.put("Cruze", new double[] {125, 7.0, 164, 2019, 18000});
         descriptions.put("Veloster", new double[] {130, 5.9, 185, 2018, 30140});
+        descriptions.put("FF", new double[] {208, 3.6, 650, 2016, 295000});
         // Convertibles
         descriptions.put("C8", new double[] {199, 3.7, 444, 2009, 354900});
         descriptions.put("S2000", new double[] {149, 6.3, 240, 2009, 35500});
@@ -245,6 +249,7 @@ public class Initializer implements ServletContextListener {
         descriptions.put("M6", new double[] {155, 4.0, 550, 2013, 130000});
         // Sports cars
         descriptions.put("Laferrari", new double[] {217, 2.6, 949, 2016, 7000000});
+        descriptions.put("Huracan", new double[] {201, 2.3, 631, 2018, 274390});
         descriptions.put("812 Superfast", new double[] {211, 3.0, 789, 2018, 340700});
         descriptions.put("488GTB", new double[] {210, 2.8, 710, 2019, 227000});
         descriptions.put("Chiron", new double[] {261, 2.9, 1500, 2019, 3260000});

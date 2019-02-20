@@ -8,6 +8,8 @@
     <title>cBay</title>
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!--JavaScript-->
     <script src="static/script/script.js" defer></script>
@@ -33,9 +35,15 @@
 </head>
 
 <body>
-
+<span id="shopping-cart-number"></span>
+<div class="shopping-cart">
+    <a id="shopping-cart-link" href="#">
+        <i id="shopping-cart-pictogram" class="fas fa-shopping-cart fa-2x"></i>
+    </a>
+</div>
 <div class="jumbotron text-center">
-    <h1>cBay</h1>
+    <img id="logo-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/logo.jpg'" alt="" />
+    <h1 id="logo-text">cBay</h1>
 </div>
 
 <div class="container">
@@ -77,7 +85,7 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="card-text">
-                            <a class="btn btn-success" href="#">Add to cart</a>
+                            <button class="card-btn">Add to cart</button>
                             <select name="qty" class="quantity">
                                 <option class="options" value="1">1</option>
                                 <option class="options" value="2">2</option>

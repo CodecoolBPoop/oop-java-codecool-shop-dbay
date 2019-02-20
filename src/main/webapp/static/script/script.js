@@ -1,8 +1,34 @@
 
 function init() {
     initialiseDropdown();
+    initialiseAddToCartBtn();
 }
 
+///// SHOPPING CART /////
+function initialiseAddToCartBtn() {
+    const addToCartBtns = document.getElementsByClassName("card-btn");
+    if (addToCartBtns !== null) {
+        for(const cartBtn of addToCartBtns) {
+            cartBtn.addEventListener('click', function (e) {
+                addQuantityToCart(e.currentTarget);
+            })
+        }
+    }
+}
+
+function addQuantityToCart(btn) {
+    const select = btn.nextElementSibling;
+    const quantityNumber = select.options[select.selectedIndex].text;
+    let cartNumber = document.getElementById("shopping-cart-number");
+    if (cartNumber.textContent === null) {
+        cartNumber.textContent = '0';
+    }
+    let newNumber = Number(cartNumber.innerText) + Number(quantityNumber);
+    cartNumber.innerText = String(newNumber);
+}
+
+
+///// DROPDOWN /////
 function initialiseDropdown() {
     const options = document.getElementById("filter-supplier");
     if (options !== null) {
