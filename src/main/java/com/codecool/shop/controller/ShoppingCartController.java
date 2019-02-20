@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -22,7 +23,6 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductDao productStore = ProductDaoMem.getInstance();
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
@@ -36,7 +36,15 @@ public class ShoppingCartController extends HttpServlet {
         engine.process("product/shoppingCart.html", context, resp.getWriter());
     }
 
+    @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.sendRedirect("/shopping-cart");
+
+        HttpSession session = req.getSession(true);
+        String sessionId = session.getId();
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+        ProductDao productStore = ProductDaoMem.getInstance();
+
+        resp.sendRedirect("/shopping-cart");
     }
+
 }

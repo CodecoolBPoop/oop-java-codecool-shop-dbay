@@ -18,6 +18,7 @@
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified JavaScript -->
+    <script rel="stylesheet" src="../../static/javascript/shoppingDataScript.js" defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
@@ -41,18 +42,28 @@
             <thead>
             <tr class="row">
                 <th class="col">Item</th>
-                <th class="col">number of item</th>
-                <th class="col-md-2">Add 1+ </th>
-                <th class="col-md-2">Remove 1- </th>
+                <th class="col-md-1"></th>
+                <th class="col-md-2">number of item</th>
+                <th class="col-md-1"></th>
                 <th class="col-md-2">Price </th>
             </tr>
             </thead>
             <tbody>
                 <tr class="row" th:each="item,iterStat : ${cartItems.getShoppingCart()}">
                     <td class="col" th:text="${item.getProduct().getName()}"></td>
-                    <td class="col" th:text="${item.getQuantity()}"></td>
-                    <td class="col-md-2"><a href="/shopping-cart"><i class="fas fa-plus-circle"></i></a></td>
-                    <td class="col-md-2"><a href="/shopping-cart"><i class="fas fa-minus-circle"></i></a></td>
+                    <td class="col-md-1">
+                        <button class="btn btn-plus" name="plus">
+                            <i class="fas fa-plus-circle"></i>
+                        </button>
+                    </td>
+                    <td class="col-md-2">
+                        <input name="quantity" value="quantity" th:value="${item.getQuantity()}" size="2">
+                    </td>
+                    <td class="col-md-1">
+                        <button class="btn btn-minus" name="minus">
+                            <i class="fas fa-minus-circle"></i>
+                         </button>
+                    </td>
                     <td class="col-md-2" th:text="${item.getProduct().getPrice()}"></td>
                 </tr>
             </tbody>
