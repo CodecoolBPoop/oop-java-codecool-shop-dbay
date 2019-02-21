@@ -11,18 +11,6 @@ public class Supplier extends BaseModel {
         this.products = new ArrayList<>();
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
-
-    public List<Product> getProducts() {
-        return this.products;
-    }
-
-    public void addProduct(Product product) {
-        this.products.add(product);
-    }
-
     public String toString() {
         return String.format("id: %1$d, " +
                         "name: %2$s, " +
@@ -31,5 +19,18 @@ public class Supplier extends BaseModel {
                 this.name,
                 this.description
         );
+    }
+
+    public void addProduct(Product product) {
+        this.products.add(product);
+    }
+
+    // GETTERS
+    public List<Product> getProducts() {
+        return this.products;
+    }
+    // SETTERS
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
     }
 }

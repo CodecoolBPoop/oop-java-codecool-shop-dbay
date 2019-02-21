@@ -13,26 +13,6 @@ public class ProductCategory extends BaseModel {
         this.products = new ArrayList<>();
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
-
-    public List<Product> getProducts() {
-        return this.products;
-    }
-
-    public void addProduct(Product product) {
-        this.products.add(product);
-    }
-
     public String toString() {
         return String.format(
                 "id: %1$d," +
@@ -43,5 +23,24 @@ public class ProductCategory extends BaseModel {
                 this.name,
                 this.department,
                 this.description);
+    }
+
+    public void addProduct(Product product) {
+        this.products.add(product);
+    }
+
+    // GETTERS
+    public String getDepartment() {
+        return department;
+    }
+    public List<Product> getProducts() {
+        return this.products;
+    }
+    // SETTERS
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
     }
 }

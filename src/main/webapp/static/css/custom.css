@@ -13,6 +13,7 @@
 {
     margin-top: 10px;
 }
+
 .item.list-group-item
 {
     float: none;
@@ -59,4 +60,138 @@
 .list-group-item-text
 {
     margin: 0 0 11px;
+}
+
+body {
+    height: 700px;
+}
+
+.header-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../web_image/website-header.jpg');
+
+    height: 50%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.category-picture {
+    height: 200px;
+}
+.category-card {
+    margin: auto;
+}
+.categories-name {
+    text-align: center;
+}
+.card-title {
+    text-align: center;
+}
+.quantity {
+    float: right;
+}
+.product-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+.col-lg-3, .col-lg-4 {
+    margin: 10px 0;
+}
+
+.card-btn {
+    color: white;
+    background-color: darkslategray;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    outline: none;
+    border: 0;
+}
+.card-btn:hover {
+    color: white;
+    background-color: dimgrey;
+    cursor: pointer;
+}
+.card-btn:focus {
+    outline: 0;
+}
+#logo-image {
+    max-width: 25%;
+    max-height: 25%;
+}
+
+.jumbotron {
+    background-image: url("/static/web_image/header.jpg");
+    background-repeat: no-repeat;
+    height: 200px;
+    background-position: center;
+}
+h1 {
+    margin-right: 850px;
+    font-weight: bold;
+    color: white;
+    font-size: 50px;
+}
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+select {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px;
+    background-color: #b0b0b0;
+    border-radius: 5px;
+    border: 0;
+}
+select:focus {
+    outline-width: 0;
+}
+option, option:hover {
+    outline: 0;
+    background-color: #b0b0b0;
+    font-weight: bold;
+}
+.card-text {
+    margin: -5px;
+}
+.card:hover {
+    background-color: #ececec;
+}
+.display-on {
+    display: block;
+}
+.display-off {
+    display: none;
+}
+.shopping-cart {
+    position: fixed;
+    margin: 10px;
+    right: 0;
+}
+#shopping-cart-pictogram {
+    padding-top: 7px;
+    color: darkslategray;
+}
+#shopping-cart-pictogram:hover {
+    color: grey;
+}
+#shopping-cart-number{
+    position: fixed;
+    right: 0;
+    margin-right: 50px;
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 25px;
+    padding-right: 5px;
 }
