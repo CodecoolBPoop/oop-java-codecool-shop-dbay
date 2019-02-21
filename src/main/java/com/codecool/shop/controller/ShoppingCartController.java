@@ -5,8 +5,10 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+import org.thymeleaf.exceptions.TemplateProcessingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,6 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductDao productStore = ProductDaoMem.getInstance();
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
@@ -33,10 +34,24 @@ public class ShoppingCartController extends HttpServlet {
 
 
         context.setVariable("cartItems", shoppingCartDataStore.getShoppingCart(sessionId));
-        engine.process("product/shoppingCart.html", context, resp.getWriter());
+        try {
+            engine.process("product/shoppingCart.html", context, resp.getWriter());
+        } catch (TemplateProcessingException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
+    @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.sendRedirect("/shopping-cart");
+
+//        int cartId = Integer.parseInt(req.getParameter("addProduct"));
+        HttpSession session = req.getSession(true);
+        String sessionId = session.getId();
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+//        ProductDao productStore = ProductDaoMem.getInstance();
+        shoppingCartDataStore.getShoppingCart(sessionId);
+
+        resp.sendRedirect("/shopping-cart");
     }
+
 }

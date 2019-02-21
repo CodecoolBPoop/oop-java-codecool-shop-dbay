@@ -1,5 +1,7 @@
 package com.codecool.shop.model;
 
+import java.text.DecimalFormat;
+
 public class LineItem{
     private int quantity;
     private Product product;
