@@ -2,7 +2,7 @@
 const plusNumber = (target) => {
     let row = target.parentNode.parentNode;
     let input = row.childNodes[5].childNodes[1];
-    let value = isNaN(input.value) ? 0 : input.value;
+    let value = isNaN(input.value) ? 1 : input.value;
     ++value;
     input.value = value;
 };
@@ -10,8 +10,8 @@ const plusNumber = (target) => {
 const minusNumber = (target) => {
     let row = target.parentNode.parentNode;
     let input = row.childNodes[5].childNodes[1];
-    let value = isNaN(input.value) ? 0 : input.value;
-    if (input.value > 0) {
+    let value = isNaN(input.value) ? 1 : input.value;
+    if (input.value > 1) {
         --value;
         input.value = value;
     }
