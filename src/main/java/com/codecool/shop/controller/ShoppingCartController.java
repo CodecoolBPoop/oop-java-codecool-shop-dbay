@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+import org.thymeleaf.exceptions.TemplateProcessingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,11 @@ public class ShoppingCartController extends HttpServlet {
 
 
         context.setVariable("cartItems", shoppingCartDataStore.getShoppingCart(sessionId));
-        engine.process("product/shoppingCart.html", context, resp.getWriter());
+        try {
+            engine.process("product/shoppingCart.html", context, resp.getWriter());
+        } catch (TemplateProcessingException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
