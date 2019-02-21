@@ -153,7 +153,6 @@ select {
     background-color: #b0b0b0;
     border-radius: 5px;
     border: 0;
-    margin-bottom: 10px;
 }
 select:focus {
     outline-width: 0;
