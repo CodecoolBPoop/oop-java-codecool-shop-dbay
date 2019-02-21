@@ -44,10 +44,12 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+//        int cartId = Integer.parseInt(req.getParameter("addProduct"));
         HttpSession session = req.getSession(true);
         String sessionId = session.getId();
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
-        ProductDao productStore = ProductDaoMem.getInstance();
+//        ProductDao productStore = ProductDaoMem.getInstance();
+        shoppingCartDataStore.getShoppingCart(sessionId);
 
         resp.sendRedirect("/shopping-cart");
     }
