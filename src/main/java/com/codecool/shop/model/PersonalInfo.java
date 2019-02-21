@@ -6,6 +6,16 @@ public class PersonalInfo {
     private String email;
     private String phoneNumber;
 
+    public PersonalInfo() {
+    }
+
+    public PersonalInfo(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getFirstName() {
         return firstName;
     }
