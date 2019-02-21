@@ -15,7 +15,6 @@ const minusNumber = (target) => {
         --value;
         input.value = value;
     }
-
 };
 
 const addClickEventListener = () => {
