@@ -47,4 +47,9 @@ public class Address {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getWholeAddress(){
+        String[] values = {String.valueOf(this.zipcode), this.country, this.city, this.address};
+        return String.join(", ", values);
+    }
 }

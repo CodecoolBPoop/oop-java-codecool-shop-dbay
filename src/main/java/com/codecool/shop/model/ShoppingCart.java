@@ -1,17 +1,26 @@
 package com.codecool.shop.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class ShoppingCart {
 
     private ArrayList<LineItem> lineItems = new ArrayList<>();
     private String sessionId;
+    private float totalPrice;
+
+
+    public String getTotalPrice() {
+        return round(this.totalPrice, 2) + " USD";
+    }
 
     public ShoppingCart() {
+        this.totalPrice = 0.0f;
     }
 
     public ShoppingCart(String sessionId) {
         this.sessionId = sessionId;
+        this.totalPrice = 0.0f;
     }
 
     public ArrayList<LineItem> getLineItems() {
@@ -37,6 +46,7 @@ public class ShoppingCart {
         if(alreadyExists!=true){
             lineItems.add(new LineItem(product));
         }
+        totalPrice+=product.getDefaultPrice();
     }
 
     public void removeFromShoppingCart(Product product){
@@ -49,9 +59,14 @@ public class ShoppingCart {
                 }
             }
         }
+        totalPrice-=product.getDefaultPrice();
     }
 
-
+    private static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
 
 
 }
