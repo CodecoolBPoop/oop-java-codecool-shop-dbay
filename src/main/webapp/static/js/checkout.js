@@ -14,9 +14,7 @@ function checkout(){
         },
         credentials: 'same-origin',
         body: JSON.stringify(shippingInfo)
-    }).then(function() {console.log("bré")});
-
-    window.location.href = "/pay";
+    }).then(function() {window.location.href = "/pay";});
 }
 
 function getShippingInfo(){
