@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+
+    <script src="static/js/checkout.js" defer></script>
 </head>
 
 <body>
@@ -46,7 +48,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr class="row" th:each="item,iterStat : ${cartItems.getShoppingCart()}">
+                <tr class="row" th:each="item,iterStat : ${cartItems.getLineItems()}">
                     <td class="col" th:text="${item.getProduct().getName()}"></td>
                     <td class="col-md-1">
                         <button class="btn btn-plus" name="plus">
@@ -65,6 +67,107 @@
                 </tr>
             </tbody>
         </table>
+        <!-- CHECKOUT MODAL -->
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkout">
+            Checkout
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="checkout" tabindex="-1" role="dialog" aria-labelledby="checkoutLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="checkoutLabel">Shipping Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="font-weight-bold">Personal Information</p>
+                                </div>
+                                <div class="col">
+                                    <p class="font-weight-bold">Billing address</p>
+                                </div>
+                                <div class="col">
+                                    <p class="font-weight-bold">Shipping address</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name">First Name</label>
+                                        <input type="text" class="form-control" id="first-name" placeholder="John">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-name">Last Name</label>
+                                        <input type="text" class="form-control" id="last-name" placeholder="Smith">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">E-mail</label>
+                                        <input type="text" class="form-control" id="email" placeholder="example@gmail.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone-number">Phone number</label>
+                                        <input type="text" class="form-control" id="phone-number" placeholder="+36 12 345 6789">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="billing-info">
+                                        <div class="form-group">
+                                            <label for="billing-country">Country</label>
+                                            <input type="text" class="form-control" id="billing-country" placeholder="Hungary">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="billing-city">City</label>
+                                            <input type="text" class="form-control" id="billing-city" placeholder="Kardosk&#250;t">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="billing-zipcode">Zipcode</label>
+                                            <input type="text" class="form-control" id="billing-zipcode" placeholder="5945">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="billing-address">Address</label>
+                                            <input type="text" class="form-control" id="billing-address" placeholder="Nevesincs u. 11.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="shipping-info">
+                                        <div class="form-group">
+                                            <label for="shipping-country">Country</label>
+                                            <input type="text" class="form-control" id="shipping-country" placeholder="Hungary">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="shipping-city">City</label>
+                                            <input type="text" class="form-control" id="shipping-city" placeholder="Csabacs&#251;d">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="shipping-zipcode">Zipcode</label>
+                                            <input type="text" class="form-control" id="shipping-zipcode" placeholder="5551">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="shipping-address">Address</label>
+                                            <input type="text" class="form-control" id="shipping-address" placeholder="Tessedik u. 24.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="proceed">Proceed to payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHECKOUT MODAL END -->
     </div>
 </div>
 
