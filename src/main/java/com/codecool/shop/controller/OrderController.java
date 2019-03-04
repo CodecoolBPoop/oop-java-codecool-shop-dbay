@@ -2,8 +2,8 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ShoppingCartDao;
-import com.codecool.shop.dao.implementation.OrderDaoMem;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.dao.implementation.memory.OrderDaoMem;
+import com.codecool.shop.dao.implementation.memory.ShoppingCartDaoMem;
 import com.codecool.shop.model.Address;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.PersonalInfo;
