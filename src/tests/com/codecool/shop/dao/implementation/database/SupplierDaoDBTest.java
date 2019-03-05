@@ -18,6 +18,8 @@ class SupplierDaoDBTest {
         SupplierDao supplierDao = SupplierDaoDB.getInstance();
         Supplier supplier = new Supplier("name", "description");
         supplier.setId(1);
-        assertEquals(supplier, supplierDao.find(1));
+//        assertEquals(supplier, supplierDao.find(1));
+//        assertSame(supplier, supplierDao.find(1));
+        assertTrue(supplier.equals(supplierDao.find(1)));
     }
 }

@@ -2,10 +2,7 @@ package com.codecool.shop.dao.implementation.database;
 
 import java.lang.reflect.Field;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class DaoDatabase {
     protected static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop"/*System.getenv("DATABASE")*/;
@@ -28,7 +25,7 @@ public abstract class DaoDatabase {
 
             //Getting and mapping results if there is a resultSet
             if(hasResult){
-                mapQueryToObjectList(statement.getResultSet());
+                resultList = mapQueryToObjectList(statement.getResultSet());
             }
         } catch (Exception e){
             System.out.println("Exception occurred during query execution");
@@ -50,7 +47,8 @@ public abstract class DaoDatabase {
 
         while(resultSet.next()){
             Object obj = WebshopEntityFactory.getInstanceOfWebshopEntity(this.getClass());
-            Field[] fields = obj.getClass().getDeclaredFields();
+            List<Field> fields = getEveryField(obj);
+
             for (Field field : fields) {
                 boolean accessible = field.isAccessible();
                 field.setAccessible(true);
@@ -60,12 +58,16 @@ public abstract class DaoDatabase {
                         switch (columnLabelsAndTypes.get(field.getName())){
                             case "string":
                                 field.set(obj, resultSet.getString(field.getName()));
+                                break;
                             case "int":
                                 field.set(obj, resultSet.getInt(field.getName()));
+                                break;
                             case "float":
                                 field.set(obj, resultSet.getFloat(field.getName()));
+                                break;
                             case "double":
                                 field.set(obj, resultSet.getDouble(field.getName()));
+                                break;
                         }
                     } else {
                         System.out.println("Field name wasn't in columLabels: " + field.getName());
@@ -81,6 +83,16 @@ public abstract class DaoDatabase {
         }
 
         return webshopEntityList;
+    }
+
+    private List<Field> getEveryField(Object obj) {
+        List<Field> fields = new ArrayList<>();
+        Class clazz = obj.getClass();
+        while (clazz != Object.class) {
+            fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
+            clazz = clazz.getSuperclass();
+        }
+        return fields;
     }
 
     protected void setQueryValues(PreparedStatement statement, List<Object> parameters) throws SQLException {
