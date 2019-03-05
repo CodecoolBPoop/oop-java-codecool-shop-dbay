@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class DaoDatabase {
-    protected static final String DATABASE;
-    protected static final String DB_USER;
-    protected static final String DB_PASSWORD;
+    protected static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop"/*System.getenv("DATABASE")*/;
+    protected static final String DB_USER = "hackmaster"/*System.getenv("DB_USER")*/;
+    protected static final String DB_PASSWORD = "password"/*System.getenv("DB_PASSWORD")*/;
 
     protected static LinkedHashMap<String, String> columnLabelsAndTypes;
 
-    protected List<Object> executeQuery(String query, LinkedHashMap<Integer, String> parameters){
+    protected List<Object> executeQuery(String query, List<Object> parameters){
         ResultSet resultSet = null;
         List<Object> resultList = null;
         boolean hasResult;
@@ -22,7 +22,7 @@ public abstract class DaoDatabase {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)){
 
-            setQueryValues(statement);
+            setQueryValues(statement, parameters);
 
             hasResult = statement.execute();
 
@@ -32,6 +32,7 @@ public abstract class DaoDatabase {
             }
         } catch (Exception e){
             System.out.println("Exception occurred during query execution");
+            e.printStackTrace();
         } finally {
             try{
                 resultSet.close();
@@ -46,6 +47,7 @@ public abstract class DaoDatabase {
 
     protected List<Object> mapQueryToObjectList(ResultSet resultSet) throws SQLException{
         List<Object> webshopEntityList = new ArrayList<>();
+
         while(resultSet.next()){
             Object obj = WebshopEntityFactory.getInstanceOfWebshopEntity(this.getClass());
             Field[] fields = obj.getClass().getDeclaredFields();
@@ -53,35 +55,45 @@ public abstract class DaoDatabase {
                 boolean accessible = field.isAccessible();
                 field.setAccessible(true);
 
-                if(columnLabelsAndTypes.containsKey(field.getName())){
-                    switch (columnLabelsAndTypes.get(field.getName())){
-                        case "string":
-                            field.set(obj, resultSet.getString(field.getName()))
+                try{
+                    if(columnLabelsAndTypes.containsKey(field.getName())){
+                        switch (columnLabelsAndTypes.get(field.getName())){
+                            case "string":
+                                field.set(obj, resultSet.getString(field.getName()));
+                            case "int":
+                                field.set(obj, resultSet.getInt(field.getName()));
+                            case "float":
+                                field.set(obj, resultSet.getFloat(field.getName()));
+                            case "double":
+                                field.set(obj, resultSet.getDouble(field.getName()));
+                        }
+                    } else {
+                        System.out.println("Field name wasn't in columLabels: " + field.getName());
                     }
-                } else {
-                    System.out.println("Field name wasn't in columLabels: " + field.getName());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
+
 
                 field.setAccessible(accessible);
             }
             webshopEntityList.add(obj);
         }
+
+        return webshopEntityList;
     }
 
-    protected void setQueryValues(PreparedStatement statement) throws SQLException {
-        int index = 1;
-        for (Map.Entry<String, String> entry : columnLabelsAndTypes.entrySet()) {
-            switch (entry.getValue()){
-                case "string":
-                    statement.setString(index, entry.getKey());
-                case "int":
-                    statement.setInt(index, Integer.parseInt(entry.getKey()));
-                case "float":
-                    statement.setFloat(index, Float.parseFloat(entry.getKey()));
-                case "double":
-                    statement.setDouble(index, Double.parseDouble(entry.getKey()));
+    protected void setQueryValues(PreparedStatement statement, List<Object> parameters) throws SQLException {
+        for (int i = 0; i < parameters.size(); i++) {
+            if(parameters.get(i) instanceof String){
+                statement.setString(i+1, (String)parameters.get(i));
+            } else if (parameters.get(i) instanceof Integer){
+                statement.setInt(i+1, (Integer)parameters.get(i));
+            } else if (parameters.get(i) instanceof Double){
+                statement.setDouble(i+1, (Double)parameters.get(i));
+            } else if (parameters.get(i) instanceof Float){
+                statement.setFloat(i+1, (Float)parameters.get(i));
             }
-            index++;
         }
     }
 
@@ -90,16 +102,5 @@ public abstract class DaoDatabase {
                 DATABASE,
                 DB_USER,
                 DB_PASSWORD);
-    }
-
-    protected void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement()
-        ){
-            statement.execute(query);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
