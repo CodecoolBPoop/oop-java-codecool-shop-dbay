@@ -4,12 +4,19 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class SupplierDaoDB extends DaoDatabase implements SupplierDao {
     private static SupplierDaoDB instance;
 
     private SupplierDaoDB(){
+        if(columnLabelsAndTypes==null){
+            columnLabelsAndTypes = new LinkedHashMap<>();
+        }
+        columnLabelsAndTypes.put("id", "int");
+        columnLabelsAndTypes.put("name", "string");
+        columnLabelsAndTypes.put("description", "string");
     }
 
     public static SupplierDaoDB getInstance(){
@@ -29,7 +36,9 @@ public class SupplierDaoDB extends DaoDatabase implements SupplierDao {
 
     @Override
     public Supplier find(int id) {
-        return null;
+        List<Object> values = new ArrayList<>();
+        values.add(id);
+        return (Supplier)executeQuery("SELECT * FROM Suppliers WHERE id=?;", values).get(0);
     }
 
     @Override

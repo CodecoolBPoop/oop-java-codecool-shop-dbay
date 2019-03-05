@@ -12,4 +12,12 @@ class SupplierDaoDBTest {
         SupplierDao supplierDao = SupplierDaoDB.getInstance();
         supplierDao.add(new Supplier("name", "description"));
     }
+
+    @Test
+    public void testIsFindingSuppliersSelectsCorrectSupplierFromDatabaseAndReturnsAMappedObject(){
+        SupplierDao supplierDao = SupplierDaoDB.getInstance();
+        Supplier supplier = new Supplier("name", "description");
+        supplier.setId(1);
+        assertEquals(supplier, supplierDao.find(1));
+    }
 }
