@@ -4,7 +4,6 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class SupplierDaoDB extends DaoDatabase implements SupplierDao {
@@ -32,7 +31,14 @@ public class SupplierDaoDB extends DaoDatabase implements SupplierDao {
     public Supplier find(int id) {
         List<Object> values = new ArrayList<>();
         values.add(id);
-        return (Supplier) executeQuery("SELECT * FROM Suppliers WHERE id=?;", values).get(0);
+        Supplier supplier=null;
+        try{
+            supplier = (Supplier) executeQuery("SELECT * FROM Suppliers WHERE id=?;", values).get(0);
+        } catch (IndexOutOfBoundsException e) {
+
+        } finally {
+            return supplier;
+        }
     }
 
     @Override
@@ -44,13 +50,11 @@ public class SupplierDaoDB extends DaoDatabase implements SupplierDao {
 
     @Override
     public List<Supplier> getAll() {
-//        List<Object> values = new ArrayList<>();
         List<Object> values = executeQuery("SELECT * FROM Suppliers;", null);
         List<Supplier> supplierList = new ArrayList<>();
         for (Object value: values) {
             if(value instanceof Supplier) supplierList.add((Supplier)value);
         }
         return supplierList;
-
     }
 }

@@ -25,15 +25,14 @@ class SupplierDaoDBTest {
         SupplierDao supplierDao = SupplierDaoDB.getInstance();
         Supplier expected = new Supplier("name5", "description5");
         expected.setId(6);
-        assertEquals(expected, supplierDao.find(6));
-//        assertSame(expected, supplierDao.find(5));
-//        assertTrue(expected.equals(supplierDao.find(5)));
+//        assertEquals(expected, supplierDao.find(5));
+        assertEquals(null, supplierDao.find(1000));
     }
 
     @Test
     public void testIsRemovingSupplierByIdRemovesTheCorrectRowFromDB(){
         SupplierDao supplierDao = SupplierDaoDB.getInstance();
-        supplierDao.remove(5);
+        supplierDao.remove(10);
     }
 
     @Test

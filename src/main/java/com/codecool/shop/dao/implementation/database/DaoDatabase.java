@@ -21,18 +21,17 @@ public abstract class DaoDatabase {
 
             hasResult = statement.execute();
 
-            //Getting and mapping results if there is a resultSet
             if(hasResult){
                 resultList = mapQueryToObjectList(statement.getResultSet());
             }
+
         } catch (Exception e){
-            System.out.println("Exception occurred during query execution");
             e.printStackTrace();
         } finally {
             try{
                 resultSet.close();
             } catch (SQLException e){
-                System.out.println("SQLException occurred during result set closing.");
+                e.printStackTrace();
             } finally {
                 return resultList;
             }
