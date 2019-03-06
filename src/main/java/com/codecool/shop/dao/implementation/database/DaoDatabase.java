@@ -6,8 +6,8 @@ import java.util.*;
 
 public abstract class DaoDatabase {
     protected static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop"/*System.getenv("DATABASE")*/;
-    protected static final String DB_USER = "hackmaster"/*System.getenv("DB_USER")*/;
-    protected static final String DB_PASSWORD = "password"/*System.getenv("DB_PASSWORD")*/;
+    protected static final String DB_USER = "zoli"/*System.getenv("DB_USER")*/;
+    protected static final String DB_PASSWORD = "zoli"/*System.getenv("DB_PASSWORD")*/;
 
     protected List<Object> executeQuery(String query, List<Object> parameters){
         ResultSet resultSet = null;
