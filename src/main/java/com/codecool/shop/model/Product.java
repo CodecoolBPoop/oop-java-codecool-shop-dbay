@@ -9,12 +9,21 @@ public class Product extends BaseModel {
     private ProductCategory productCategory;
     private Supplier supplier;
 
+    private int bhp;
+
+    private double acceleration;
+    private int modelYear;
+    private int topSpeed;
 
     public Product(String name, int topSpeed, double acceleration, int bhp, int modelYear, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description, acceleration, topSpeed,  bhp, modelYear);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+        this.bhp = bhp;
+        this.acceleration = acceleration;
+        this.modelYear = modelYear;
+        this.topSpeed = topSpeed;
     }
 
     public Product() {
@@ -38,6 +47,19 @@ public class Product extends BaseModel {
 
 
     // GETTERS
+
+    public int getBhp() {
+        return bhp;
+    }
+    public double getAcceleration() {
+        return acceleration;
+    }
+    public int getModelYear() {
+        return modelYear;
+    }
+    public int getTopSpeed() {
+        return topSpeed;
+    }
     public float getDefaultPrice() { return defaultPrice; }
     public String getPrice() {
         String price = Float.toString(this.defaultPrice);

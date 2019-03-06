@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class ShoppingCart {
 
+    private int id;
     private ArrayList<LineItem> lineItems = new ArrayList<>();
     private String sessionId;
     private float totalPrice;
@@ -15,10 +16,12 @@ public class ShoppingCart {
     }
 
     public ShoppingCart() {
+        this.id = 0;
         this.totalPrice = 0.0f;
     }
 
     public ShoppingCart(String sessionId) {
+        this.id = 0;
         this.sessionId = sessionId;
         this.totalPrice = 0.0f;
     }
