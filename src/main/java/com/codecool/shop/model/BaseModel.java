@@ -2,32 +2,27 @@ package com.codecool.shop.model;
 
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 public class BaseModel {
 
     protected int id;
     protected String name;
     protected String description;
-    protected int bhp;
-    protected double acceleration;
-    protected int modelYear;
-    protected int topSpeed;
+
 
 
     public BaseModel() {
     }
 
-    public BaseModel(String name) {
+    public BaseModel(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
     public BaseModel(String name, String description, double acceleration, int topSpeed,int bhp, int modelYear) {
         this.name = name;
         this.description = description;
-        this.bhp = bhp;
-        this.acceleration = acceleration;
-        this.modelYear = modelYear;
-        this.topSpeed = topSpeed;
     }
 
 
@@ -59,10 +54,6 @@ public class BaseModel {
     public String getDescription() {
         return description;
     }
-    public int getModelYear() { return modelYear; }
-    public double getAcceleration() { return acceleration; }
-    public int getBhp() { return bhp; }
-    public int getTopSpeed() { return topSpeed; }
     // SETTERS
     public void setId(int id) {
         this.id = id;
@@ -73,8 +64,18 @@ public class BaseModel {
     public void setDescription(String description) {
         this.description = description;
     }
-    public void setModelYear(int modelYear) { this.modelYear = modelYear; }
-    public void setBhp(int bhp) { this.bhp = bhp; }
-    public void setAcceleration(int acceleration) { this.acceleration = acceleration; }
-    public void setTopSpeed(int topSpeed) { this.topSpeed = topSpeed; }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BaseModel)) return false;
+        BaseModel baseModel = (BaseModel) o;
+        return id == baseModel.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
