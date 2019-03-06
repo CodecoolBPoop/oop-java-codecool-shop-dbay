@@ -51,6 +51,5 @@ public class SupplierDaoDB extends DaoDatabase implements SupplierDao {
             if(value instanceof Supplier) supplierList.add((Supplier)value);
         }
         return supplierList;
-
     }
 }
