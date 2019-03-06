@@ -9,8 +9,6 @@ public abstract class DaoDatabase {
     protected static final String DB_USER = "hackmaster"/*System.getenv("DB_USER")*/;
     protected static final String DB_PASSWORD = "password"/*System.getenv("DB_PASSWORD")*/;
 
-    protected static LinkedHashMap<String, String> columnLabelsAndTypes;
-
     protected List<Object> executeQuery(String query, List<Object> parameters){
         ResultSet resultSet = null;
         List<Object> resultList = null;
@@ -43,6 +41,7 @@ public abstract class DaoDatabase {
     }
 
     protected List<Object> mapQueryToObjectList(ResultSet resultSet) throws SQLException{
+        LinkedHashMap<String, String> columnLabelsAndTypes = getColumnsAndTypes(resultSet.getMetaData());
         List<Object> webshopEntityList = new ArrayList<>();
 
         while(resultSet.next()){
@@ -68,6 +67,12 @@ public abstract class DaoDatabase {
                             case "double":
                                 field.set(obj, resultSet.getDouble(field.getName()));
                                 break;
+                            case "serial":
+                                field.set(obj, resultSet.getInt(field.getName()));
+                                break;
+                            case "varchar":
+                                field.set(obj, resultSet.getString(field.getName()));
+                                break;
                         }
                     } else {
                         System.out.println("Field name wasn't in columLabels: " + field.getName());
@@ -85,7 +90,18 @@ public abstract class DaoDatabase {
         return webshopEntityList;
     }
 
-    private List<Field> getEveryField(Object obj) {
+    protected LinkedHashMap<String, String> getColumnsAndTypes(ResultSetMetaData metaData) throws SQLException{
+        LinkedHashMap<String, String> columLabelsAndTypes = new LinkedHashMap<>();
+        int numberOfColumns = metaData.getColumnCount();
+        for (int i = 1; i <= numberOfColumns; i++) {
+            String columName = metaData.getColumnName(i);
+            String columType = metaData.getColumnTypeName(i);
+            columLabelsAndTypes.put(columName, columType);
+        }
+        return columLabelsAndTypes;
+    }
+
+    protected List<Field> getEveryField(Object obj) {
         List<Field> fields = new ArrayList<>();
         Class clazz = obj.getClass();
         while (clazz != Object.class) {
@@ -96,6 +112,7 @@ public abstract class DaoDatabase {
     }
 
     protected void setQueryValues(PreparedStatement statement, List<Object> parameters) throws SQLException {
+        if(parameters==null) return;
         for (int i = 0; i < parameters.size(); i++) {
             if(parameters.get(i) instanceof String){
                 statement.setString(i+1, (String)parameters.get(i));

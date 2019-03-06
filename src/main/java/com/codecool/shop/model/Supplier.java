@@ -33,4 +33,6 @@ public class Supplier extends BaseModel {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
+
+
 }

@@ -10,17 +10,11 @@ import java.util.List;
 public class SupplierDaoDB extends DaoDatabase implements SupplierDao {
     private static SupplierDaoDB instance;
 
-    private SupplierDaoDB(){
-        if(columnLabelsAndTypes==null){
-            columnLabelsAndTypes = new LinkedHashMap<>();
-        }
-        columnLabelsAndTypes.put("id", "int");
-        columnLabelsAndTypes.put("name", "string");
-        columnLabelsAndTypes.put("description", "string");
+    private SupplierDaoDB() {
     }
 
-    public static SupplierDaoDB getInstance(){
-        if(instance == null){
+    public static SupplierDaoDB getInstance() {
+        if (instance == null) {
             instance = new SupplierDaoDB();
         }
         return instance;
@@ -38,16 +32,25 @@ public class SupplierDaoDB extends DaoDatabase implements SupplierDao {
     public Supplier find(int id) {
         List<Object> values = new ArrayList<>();
         values.add(id);
-        return (Supplier)executeQuery("SELECT * FROM Suppliers WHERE id=?;", values).get(0);
+        return (Supplier) executeQuery("SELECT * FROM Suppliers WHERE id=?;", values).get(0);
     }
 
     @Override
     public void remove(int id) {
-
+        List<Object> values = new ArrayList<>();
+        values.add(id);
+        executeQuery("DELETE FROM Suppliers WHERE id=?;", values);
     }
 
     @Override
     public List<Supplier> getAll() {
-        return null;
+//        List<Object> values = new ArrayList<>();
+        List<Object> values = executeQuery("SELECT * FROM Suppliers;", null);
+        List<Supplier> supplierList = new ArrayList<>();
+        for (Object value: values) {
+            if(value instanceof Supplier) supplierList.add((Supplier)value);
+        }
+        return supplierList;
+
     }
 }
