@@ -10,10 +10,7 @@ public class BaseModel {
     protected String name;
     protected String description;
 
-
-
-    public BaseModel() {
-    }
+    public BaseModel() {}
 
     public BaseModel(String name, String description) {
         this.name = name;

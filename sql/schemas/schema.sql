@@ -20,7 +20,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: addresses; Type: TABLE; Schema: public; Owner: hackmaster
+-- Name: addresses; Type: TABLE; Schema: public; Owner: zoli
 --
 
 CREATE TABLE public.addresses (
@@ -32,10 +32,10 @@ CREATE TABLE public.addresses (
 );
 
 
-ALTER TABLE public.addresses OWNER TO hackmaster;
+ALTER TABLE public.addresses OWNER TO zoli;
 
 --
--- Name: addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: hackmaster
+-- Name: addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: zoli
 --
 
 CREATE SEQUENCE public.addresses_id_seq
@@ -47,17 +47,17 @@ CREATE SEQUENCE public.addresses_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.addresses_id_seq OWNER TO hackmaster;
+ALTER TABLE public.addresses_id_seq OWNER TO zoli;
 
 --
--- Name: addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hackmaster
+-- Name: addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: zoli
 --
 
 ALTER SEQUENCE public.addresses_id_seq OWNED BY public.addresses.id;
 
 
 --
--- Name: line_items; Type: TABLE; Schema: public; Owner: hackmaster
+-- Name: line_items; Type: TABLE; Schema: public; Owner: zoli
 --
 
 CREATE TABLE public.line_items (
@@ -68,10 +68,10 @@ CREATE TABLE public.line_items (
 );
 
 
-ALTER TABLE public.line_items OWNER TO hackmaster;
+ALTER TABLE public.line_items OWNER TO zoli;
 
 --
--- Name: line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: hackmaster
+-- Name: line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: zoli
 --
 
 CREATE SEQUENCE public.line_items_id_seq
@@ -83,17 +83,17 @@ CREATE SEQUENCE public.line_items_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.line_items_id_seq OWNER TO hackmaster;
+ALTER TABLE public.line_items_id_seq OWNER TO zoli;
 
 --
--- Name: line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hackmaster
+-- Name: line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: zoli
 --
 
 ALTER SEQUENCE public.line_items_id_seq OWNED BY public.line_items.id;
 
 
 --
--- Name: orders; Type: TABLE; Schema: public; Owner: hackmaster
+-- Name: orders; Type: TABLE; Schema: public; Owner: zoli
 --
 
 CREATE TABLE public.orders (
@@ -106,10 +106,10 @@ CREATE TABLE public.orders (
 );
 
 
-ALTER TABLE public.orders OWNER TO hackmaster;
+ALTER TABLE public.orders OWNER TO zoli;
 
 --
--- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: hackmaster
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: zoli
 --
 
 CREATE SEQUENCE public.orders_id_seq
@@ -121,17 +121,17 @@ CREATE SEQUENCE public.orders_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.orders_id_seq OWNER TO hackmaster;
+ALTER TABLE public.orders_id_seq OWNER TO zoli;
 
 --
--- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hackmaster
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: zoli
 --
 
 ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
 
 
 --
--- Name: personal_info; Type: TABLE; Schema: public; Owner: hackmaster
+-- Name: personal_info; Type: TABLE; Schema: public; Owner: zoli
 --
 
 CREATE TABLE public.personal_info (
@@ -143,10 +143,10 @@ CREATE TABLE public.personal_info (
 );
 
 
-ALTER TABLE public.personal_info OWNER TO hackmaster;
+ALTER TABLE public.personal_info OWNER TO zoli;
 
 --
--- Name: personal_info_id_seq; Type: SEQUENCE; Schema: public; Owner: hackmaster
+-- Name: personal_info_id_seq; Type: SEQUENCE; Schema: public; Owner: zoli
 --
 
 CREATE SEQUENCE public.personal_info_id_seq
@@ -158,17 +158,17 @@ CREATE SEQUENCE public.personal_info_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.personal_info_id_seq OWNER TO hackmaster;
+ALTER TABLE public.personal_info_id_seq OWNER TO zoli;
 
 --
--- Name: personal_info_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hackmaster
+-- Name: personal_info_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: zoli
 --
 
 ALTER SEQUENCE public.personal_info_id_seq OWNED BY public.personal_info.id;
 
 
 --
--- Name: product_categories; Type: TABLE; Schema: public; Owner: hackmaster
+-- Name: product_categories; Type: TABLE; Schema: public; Owner: zoli
 --
 
 CREATE TABLE public.product_categories (
@@ -179,10 +179,10 @@ CREATE TABLE public.product_categories (
 );
 
 
-ALTER TABLE public.product_categories OWNER TO hackmaster;
+ALTER TABLE public.product_categories OWNER TO zoli;
 
 --
--- Name: product_category_id_seq; Type: SEQUENCE; Schema: public; Owner: hackmaster
+-- Name: product_category_id_seq; Type: SEQUENCE; Schema: public; Owner: zoli
 --
 
 CREATE SEQUENCE public.product_category_id_seq
@@ -194,17 +194,17 @@ CREATE SEQUENCE public.product_category_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.product_category_id_seq OWNER TO hackmaster;
+ALTER TABLE public.product_category_id_seq OWNER TO zoli;
 
 --
--- Name: product_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hackmaster
+-- Name: product_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: zoli
 --
 
 ALTER SEQUENCE public.product_category_id_seq OWNED BY public.product_categories.id;
 
 
 --
--- Name: products; Type: TABLE; Schema: public; Owner: hackmaster
+-- Name: products; Type: TABLE; Schema: public; Owner: zoli
 --
 
 CREATE TABLE public.products (
@@ -222,10 +222,10 @@ CREATE TABLE public.products (
 );
 
 
-ALTER TABLE public.products OWNER TO hackmaster;
+ALTER TABLE public.products OWNER TO zoli;
 
 --
--- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: hackmaster
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: zoli
 --
 
 CREATE SEQUENCE public.products_id_seq
@@ -237,17 +237,17 @@ CREATE SEQUENCE public.products_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.products_id_seq OWNER TO hackmaster;
+ALTER TABLE public.products_id_seq OWNER TO zoli;
 
 --
--- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hackmaster
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: zoli
 --
 
 ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
 
 
 --
--- Name: shopping_carts; Type: TABLE; Schema: public; Owner: hackmaster
+-- Name: shopping_carts; Type: TABLE; Schema: public; Owner: zoli
 --
 
 CREATE TABLE public.shopping_carts (
@@ -257,10 +257,10 @@ CREATE TABLE public.shopping_carts (
 );
 
 
-ALTER TABLE public.shopping_carts OWNER TO hackmaster;
+ALTER TABLE public.shopping_carts OWNER TO zoli;
 
 --
--- Name: shopping_carts_id_seq; Type: SEQUENCE; Schema: public; Owner: hackmaster
+-- Name: shopping_carts_id_seq; Type: SEQUENCE; Schema: public; Owner: zoli
 --
 
 CREATE SEQUENCE public.shopping_carts_id_seq
@@ -272,17 +272,17 @@ CREATE SEQUENCE public.shopping_carts_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.shopping_carts_id_seq OWNER TO hackmaster;
+ALTER TABLE public.shopping_carts_id_seq OWNER TO zoli;
 
 --
--- Name: shopping_carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hackmaster
+-- Name: shopping_carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: zoli
 --
 
 ALTER SEQUENCE public.shopping_carts_id_seq OWNED BY public.shopping_carts.id;
 
 
 --
--- Name: suppliers; Type: TABLE; Schema: public; Owner: hackmaster
+-- Name: suppliers; Type: TABLE; Schema: public; Owner: zoli
 --
 
 CREATE TABLE public.suppliers (
@@ -292,10 +292,10 @@ CREATE TABLE public.suppliers (
 );
 
 
-ALTER TABLE public.suppliers OWNER TO hackmaster;
+ALTER TABLE public.suppliers OWNER TO zoli;
 
 --
--- Name: suppliers_id_seq; Type: SEQUENCE; Schema: public; Owner: hackmaster
+-- Name: suppliers_id_seq; Type: SEQUENCE; Schema: public; Owner: zoli
 --
 
 CREATE SEQUENCE public.suppliers_id_seq
@@ -307,73 +307,73 @@ CREATE SEQUENCE public.suppliers_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.suppliers_id_seq OWNER TO hackmaster;
+ALTER TABLE public.suppliers_id_seq OWNER TO zoli;
 
 --
--- Name: suppliers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hackmaster
+-- Name: suppliers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: zoli
 --
 
 ALTER SEQUENCE public.suppliers_id_seq OWNED BY public.suppliers.id;
 
 
 --
--- Name: addresses id; Type: DEFAULT; Schema: public; Owner: hackmaster
+-- Name: addresses id; Type: DEFAULT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.addresses ALTER COLUMN id SET DEFAULT nextval('public.addresses_id_seq'::regclass);
 
 
 --
--- Name: line_items id; Type: DEFAULT; Schema: public; Owner: hackmaster
+-- Name: line_items id; Type: DEFAULT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.line_items ALTER COLUMN id SET DEFAULT nextval('public.line_items_id_seq'::regclass);
 
 
 --
--- Name: orders id; Type: DEFAULT; Schema: public; Owner: hackmaster
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
 
 
 --
--- Name: personal_info id; Type: DEFAULT; Schema: public; Owner: hackmaster
+-- Name: personal_info id; Type: DEFAULT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.personal_info ALTER COLUMN id SET DEFAULT nextval('public.personal_info_id_seq'::regclass);
 
 
 --
--- Name: product_categories id; Type: DEFAULT; Schema: public; Owner: hackmaster
+-- Name: product_categories id; Type: DEFAULT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.product_categories ALTER COLUMN id SET DEFAULT nextval('public.product_category_id_seq'::regclass);
 
 
 --
--- Name: products id; Type: DEFAULT; Schema: public; Owner: hackmaster
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
 
 
 --
--- Name: shopping_carts id; Type: DEFAULT; Schema: public; Owner: hackmaster
+-- Name: shopping_carts id; Type: DEFAULT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.shopping_carts ALTER COLUMN id SET DEFAULT nextval('public.shopping_carts_id_seq'::regclass);
 
 
 --
--- Name: suppliers id; Type: DEFAULT; Schema: public; Owner: hackmaster
+-- Name: suppliers id; Type: DEFAULT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.suppliers ALTER COLUMN id SET DEFAULT nextval('public.suppliers_id_seq'::regclass);
 
 
 --
--- Data for Name: addresses; Type: TABLE DATA; Schema: public; Owner: hackmaster
+-- Data for Name: addresses; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
 COPY public.addresses (id, country, city, zipcode, address) FROM stdin;
@@ -381,7 +381,7 @@ COPY public.addresses (id, country, city, zipcode, address) FROM stdin;
 
 
 --
--- Data for Name: line_items; Type: TABLE DATA; Schema: public; Owner: hackmaster
+-- Data for Name: line_items; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
 COPY public.line_items (id, product, quantity, cart) FROM stdin;
@@ -389,7 +389,7 @@ COPY public.line_items (id, product, quantity, cart) FROM stdin;
 
 
 --
--- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: hackmaster
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
 COPY public.orders (id, personalinfo, shippingaddress, cart, billingaddress, sessionid) FROM stdin;
@@ -397,7 +397,7 @@ COPY public.orders (id, personalinfo, shippingaddress, cart, billingaddress, ses
 
 
 --
--- Data for Name: personal_info; Type: TABLE DATA; Schema: public; Owner: hackmaster
+-- Data for Name: personal_info; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
 COPY public.personal_info (id, firstname, lastname, email, phonenumber) FROM stdin;
@@ -405,7 +405,7 @@ COPY public.personal_info (id, firstname, lastname, email, phonenumber) FROM std
 
 
 --
--- Data for Name: product_categories; Type: TABLE DATA; Schema: public; Owner: hackmaster
+-- Data for Name: product_categories; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
 COPY public.product_categories (id, name, description, department) FROM stdin;
@@ -413,7 +413,7 @@ COPY public.product_categories (id, name, description, department) FROM stdin;
 
 
 --
--- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: hackmaster
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
 COPY public.products (id, name, description, defaultprice, defaultcurrency, productcategory, supplier, bhp, acceleration, modelyear, topspeed) FROM stdin;
@@ -421,7 +421,7 @@ COPY public.products (id, name, description, defaultprice, defaultcurrency, prod
 
 
 --
--- Data for Name: shopping_carts; Type: TABLE DATA; Schema: public; Owner: hackmaster
+-- Data for Name: shopping_carts; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
 COPY public.shopping_carts (id, sessionid, totalprice) FROM stdin;
@@ -429,7 +429,7 @@ COPY public.shopping_carts (id, sessionid, totalprice) FROM stdin;
 
 
 --
--- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: hackmaster
+-- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
 COPY public.suppliers (id, name, description) FROM stdin;
@@ -443,63 +443,63 @@ COPY public.suppliers (id, name, description) FROM stdin;
 
 
 --
--- Name: addresses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackmaster
+-- Name: addresses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: zoli
 --
 
 SELECT pg_catalog.setval('public.addresses_id_seq', 1, false);
 
 
 --
--- Name: line_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackmaster
+-- Name: line_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: zoli
 --
 
 SELECT pg_catalog.setval('public.line_items_id_seq', 1, false);
 
 
 --
--- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackmaster
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: zoli
 --
 
 SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
 
 
 --
--- Name: personal_info_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackmaster
+-- Name: personal_info_id_seq; Type: SEQUENCE SET; Schema: public; Owner: zoli
 --
 
 SELECT pg_catalog.setval('public.personal_info_id_seq', 1, false);
 
 
 --
--- Name: product_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackmaster
+-- Name: product_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: zoli
 --
 
 SELECT pg_catalog.setval('public.product_category_id_seq', 1, false);
 
 
 --
--- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackmaster
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: zoli
 --
 
 SELECT pg_catalog.setval('public.products_id_seq', 1, false);
 
 
 --
--- Name: shopping_carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackmaster
+-- Name: shopping_carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: zoli
 --
 
 SELECT pg_catalog.setval('public.shopping_carts_id_seq', 1, false);
 
 
 --
--- Name: suppliers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hackmaster
+-- Name: suppliers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: zoli
 --
 
 SELECT pg_catalog.setval('public.suppliers_id_seq', 7, true);
 
 
 --
--- Name: addresses addresses_pk; Type: CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: addresses addresses_pk; Type: CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.addresses
@@ -507,7 +507,7 @@ ALTER TABLE ONLY public.addresses
 
 
 --
--- Name: line_items line_items_pk; Type: CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: line_items line_items_pk; Type: CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.line_items
@@ -515,7 +515,7 @@ ALTER TABLE ONLY public.line_items
 
 
 --
--- Name: orders orders_pk; Type: CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: orders orders_pk; Type: CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.orders
@@ -523,7 +523,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- Name: personal_info personal_info_pk; Type: CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: personal_info personal_info_pk; Type: CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.personal_info
@@ -531,7 +531,7 @@ ALTER TABLE ONLY public.personal_info
 
 
 --
--- Name: product_categories product_category_pk; Type: CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: product_categories product_category_pk; Type: CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.product_categories
@@ -539,7 +539,7 @@ ALTER TABLE ONLY public.product_categories
 
 
 --
--- Name: products products_pk; Type: CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: products products_pk; Type: CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.products
@@ -547,7 +547,7 @@ ALTER TABLE ONLY public.products
 
 
 --
--- Name: shopping_carts shopping_carts_pk; Type: CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: shopping_carts shopping_carts_pk; Type: CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.shopping_carts
@@ -555,7 +555,7 @@ ALTER TABLE ONLY public.shopping_carts
 
 
 --
--- Name: suppliers suppliers_pk; Type: CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: suppliers suppliers_pk; Type: CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.suppliers
@@ -563,63 +563,63 @@ ALTER TABLE ONLY public.suppliers
 
 
 --
--- Name: addresses_id_uindex; Type: INDEX; Schema: public; Owner: hackmaster
+-- Name: addresses_id_uindex; Type: INDEX; Schema: public; Owner: zoli
 --
 
 CREATE UNIQUE INDEX addresses_id_uindex ON public.addresses USING btree (id);
 
 
 --
--- Name: line_items_id_uindex; Type: INDEX; Schema: public; Owner: hackmaster
+-- Name: line_items_id_uindex; Type: INDEX; Schema: public; Owner: zoli
 --
 
 CREATE UNIQUE INDEX line_items_id_uindex ON public.line_items USING btree (id);
 
 
 --
--- Name: orders_id_uindex; Type: INDEX; Schema: public; Owner: hackmaster
+-- Name: orders_id_uindex; Type: INDEX; Schema: public; Owner: zoli
 --
 
 CREATE UNIQUE INDEX orders_id_uindex ON public.orders USING btree (id);
 
 
 --
--- Name: personal_info_id_uindex; Type: INDEX; Schema: public; Owner: hackmaster
+-- Name: personal_info_id_uindex; Type: INDEX; Schema: public; Owner: zoli
 --
 
 CREATE UNIQUE INDEX personal_info_id_uindex ON public.personal_info USING btree (id);
 
 
 --
--- Name: product_category_id_uindex; Type: INDEX; Schema: public; Owner: hackmaster
+-- Name: product_category_id_uindex; Type: INDEX; Schema: public; Owner: zoli
 --
 
 CREATE UNIQUE INDEX product_category_id_uindex ON public.product_categories USING btree (id);
 
 
 --
--- Name: products_id_uindex; Type: INDEX; Schema: public; Owner: hackmaster
+-- Name: products_id_uindex; Type: INDEX; Schema: public; Owner: zoli
 --
 
 CREATE UNIQUE INDEX products_id_uindex ON public.products USING btree (id);
 
 
 --
--- Name: shopping_carts_id_uindex; Type: INDEX; Schema: public; Owner: hackmaster
+-- Name: shopping_carts_id_uindex; Type: INDEX; Schema: public; Owner: zoli
 --
 
 CREATE UNIQUE INDEX shopping_carts_id_uindex ON public.shopping_carts USING btree (id);
 
 
 --
--- Name: suppliers_id_uindex; Type: INDEX; Schema: public; Owner: hackmaster
+-- Name: suppliers_id_uindex; Type: INDEX; Schema: public; Owner: zoli
 --
 
 CREATE UNIQUE INDEX suppliers_id_uindex ON public.suppliers USING btree (id);
 
 
 --
--- Name: orders billing_address_fk; Type: FK CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: orders billing_address_fk; Type: FK CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.orders
@@ -627,7 +627,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- Name: line_items cart_fk; Type: FK CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: line_items cart_fk; Type: FK CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.line_items
@@ -635,7 +635,7 @@ ALTER TABLE ONLY public.line_items
 
 
 --
--- Name: orders personal_info_fk; Type: FK CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: orders personal_info_fk; Type: FK CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.orders
@@ -643,7 +643,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- Name: line_items product_fk; Type: FK CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: line_items product_fk; Type: FK CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.line_items
@@ -651,7 +651,7 @@ ALTER TABLE ONLY public.line_items
 
 
 --
--- Name: products productcategory_fk; Type: FK CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: products productcategory_fk; Type: FK CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.products
@@ -659,7 +659,7 @@ ALTER TABLE ONLY public.products
 
 
 --
--- Name: orders shipping_address_fk; Type: FK CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: orders shipping_address_fk; Type: FK CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.orders
@@ -667,7 +667,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- Name: orders shopping_cart_fk; Type: FK CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: orders shopping_cart_fk; Type: FK CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.orders
@@ -675,7 +675,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- Name: products supplier_fk; Type: FK CONSTRAINT; Schema: public; Owner: hackmaster
+-- Name: products supplier_fk; Type: FK CONSTRAINT; Schema: public; Owner: zoli
 --
 
 ALTER TABLE ONLY public.products
