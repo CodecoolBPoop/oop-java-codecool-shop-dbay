@@ -83,6 +83,7 @@ public class Product extends BaseModel {
     // SETTERS
     public void setDefaultPrice(float defaultPrice) { this.defaultPrice = defaultPrice; }
     public void setDefaultCurrency(String defaultCurrency) { this.defaultCurrency = defaultCurrency; }
+    public void setAcceleration(double acceleration) { this.acceleration = acceleration; }
     public void setPrice(float price, String currency) {
         this.defaultPrice = price;
         this.defaultCurrency = currency;

@@ -5,6 +5,7 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +66,8 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
             for (Supplier supplier: suppliers) {
                 if(supplier.getId() == product.getSupplierID()) {
                     product.setSupplier(supplier);
+                    DecimalFormat df = new DecimalFormat("#.0");
+                    product.setAcceleration(Double.parseDouble(df.format(product.getAcceleration())));
                     break;
                 }
             }
@@ -92,13 +95,6 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
         values.add(productCategory.getId());
         List<Object> productcategory = executeQuery("SELECT * FROM Products WHERE productcategory=?;", values);
         return getProducts(productcategory);
-    }
-
-    public List<Product> getProductsByCategory(int categoryID) {
-        List<Object> values = new ArrayList<>();
-        values.add(categoryID);
-        List<Object> products = executeQuery("SELECT * FROM Products WHERE productcategory=?;", values);
-        return getProducts(products);
     }
 
     private List<Product> getProducts(List<Object> productcategory) {
