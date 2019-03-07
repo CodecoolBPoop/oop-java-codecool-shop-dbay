@@ -7,12 +7,12 @@ import com.codecool.shop.model.Supplier;
 public class WebshopEntityFactory {
     public static Object getInstanceOfWebshopEntity(Class entityClass){
         switch (entityClass.getName()){
-//            case "com.codecool.shop.dao.implementation.database.ProductCategoryDaoDB":
-//                return new ProductCategory();
+            case "com.codecool.shop.dao.implementation.database.ProductCategoryDaoDB":
+                return new ProductCategory();
             case "com.codecool.shop.dao.implementation.database.ProductDaoDB":
                 return new Product();
             case "com.codecool.shop.dao.implementation.database.SupplierDaoDB":
-                return new Supplier("testName", "testDescription");
+                return new Supplier();
             default:
                 return null;
         }

@@ -416,7 +416,7 @@ COPY public.product_categories (id, name, description, department) FROM stdin;
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
-COPY public.products (id, name, description, defaultprice, defaultcurrency, productcategory, supplier, bhp, acceleration, modelyear, topspeed) FROM stdin;
+COPY public.products (id, name, description, defaultprice, defaultcurrency, productCategoryID, supplierID, bhp, acceleration, modelyear, topspeed) FROM stdin;
 \.
 
 
@@ -655,7 +655,7 @@ ALTER TABLE ONLY public.line_items
 --
 
 ALTER TABLE ONLY public.products
-    ADD CONSTRAINT productcategory_fk FOREIGN KEY (productcategory) REFERENCES public.product_categories(id);
+    ADD CONSTRAINT productcategory_fk FOREIGN KEY (productCategoryID) REFERENCES public.product_categories(id);
 
 
 --
@@ -679,7 +679,7 @@ ALTER TABLE ONLY public.orders
 --
 
 ALTER TABLE ONLY public.products
-    ADD CONSTRAINT supplier_fk FOREIGN KEY (supplier) REFERENCES public.suppliers(id);
+    ADD CONSTRAINT supplier_fk FOREIGN KEY (supplierID) REFERENCES public.suppliers(id);
 
 
 --

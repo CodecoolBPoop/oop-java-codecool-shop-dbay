@@ -61,7 +61,13 @@ public abstract class DaoDatabase {
                             case "int":
                                 field.set(obj, resultSet.getInt(field.getName()));
                                 break;
+                            case "int4":
+                                field.set(obj, resultSet.getInt(field.getName()));
+                                break;
                             case "float":
+                                field.set(obj, resultSet.getFloat(field.getName()));
+                                break;
+                            case "float8":
                                 field.set(obj, resultSet.getFloat(field.getName()));
                                 break;
                             case "double":
