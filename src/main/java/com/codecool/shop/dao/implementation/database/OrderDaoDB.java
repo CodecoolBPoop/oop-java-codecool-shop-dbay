@@ -138,7 +138,7 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
         values.add(order.getBillingAddressID());
         values.add(order.getCartID());
         values.add(order.getSessionId());
-        executeQuery("INSERT INTO Orders (personalInfoId, shippingAddressId, billingAddressId, cartId, sessionId) VALUES (?, ?, ?, ?, ?)", )
+        executeQuery("INSERT INTO Orders (personalInfoId, shippingAddressId, billingAddressId, cartId, sessionId) VALUES (?, ?, ?, ?, ?)", values);
     }
 
     @Override
