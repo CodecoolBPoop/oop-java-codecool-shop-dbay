@@ -13,6 +13,9 @@ public class ProductCategory extends BaseModel {
         this.products = new ArrayList<>();
     }
 
+    public ProductCategory() {
+    }
+
     public String toString() {
         return String.format(
                 "id: %1$d," +

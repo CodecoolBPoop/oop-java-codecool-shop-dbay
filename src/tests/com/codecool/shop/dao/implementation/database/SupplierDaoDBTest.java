@@ -13,11 +13,6 @@ class SupplierDaoDBTest {
     public void testAddingNewSupplierInsertsSupplierToDatabase(){
         SupplierDao supplierDao = SupplierDaoDB.getInstance();
         supplierDao.add(new Supplier("name1", "description1"));
-        supplierDao.add(new Supplier("name2", "description2"));
-        supplierDao.add(new Supplier("name3", "description3"));
-        supplierDao.add(new Supplier("name4", "description4"));
-        supplierDao.add(new Supplier("name5", "description5"));
-        supplierDao.add(new Supplier("name6", "description6"));
     }
 
     @Test

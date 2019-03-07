@@ -11,6 +11,9 @@ public class Supplier extends BaseModel {
         this.products = new ArrayList<>();
     }
 
+    public Supplier() {
+    }
+
     public String toString() {
         return String.format("id: %1$d, " +
                         "name: %2$s, " +

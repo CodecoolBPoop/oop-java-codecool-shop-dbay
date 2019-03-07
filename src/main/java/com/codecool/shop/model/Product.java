@@ -16,7 +16,7 @@ public class Product extends BaseModel {
     private int topSpeed;
 
     public Product(String name, int topSpeed, double acceleration, int bhp, int modelYear, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
-        super(name, description, acceleration, topSpeed,  bhp, modelYear);
+        super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);

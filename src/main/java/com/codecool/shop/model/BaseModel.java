@@ -13,11 +13,7 @@ public class BaseModel {
     public BaseModel() {}
 
     public BaseModel(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public BaseModel(String name, String description, double acceleration, int topSpeed,int bhp, int modelYear) {
+        this.id = 0;
         this.name = name;
         this.description = description;
     }

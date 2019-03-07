@@ -392,7 +392,7 @@ COPY public.line_items (id, product, quantity, cart) FROM stdin;
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
-COPY public.orders (id, personalinfo, shippingaddress, cart, billingaddress, sessionid) FROM stdin;
+COPY public.orders (id, personalInfoID, shippingAddressID, cartID, billingAddressID, sessionid) FROM stdin;
 \.
 
 
@@ -623,7 +623,7 @@ CREATE UNIQUE INDEX suppliers_id_uindex ON public.suppliers USING btree (id);
 --
 
 ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT billing_address_fk FOREIGN KEY (billingaddress) REFERENCES public.addresses(id);
+    ADD CONSTRAINT billing_address_fk FOREIGN KEY (billingAddressID) REFERENCES public.addresses(id);
 
 
 --
@@ -639,7 +639,7 @@ ALTER TABLE ONLY public.line_items
 --
 
 ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT personal_info_fk FOREIGN KEY (personalinfo) REFERENCES public.personal_info(id);
+    ADD CONSTRAINT personal_info_fk FOREIGN KEY (personalInfoID) REFERENCES public.personal_info(id);
 
 
 --
@@ -663,7 +663,7 @@ ALTER TABLE ONLY public.products
 --
 
 ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT shipping_address_fk FOREIGN KEY (shippingaddress) REFERENCES public.addresses(id);
+    ADD CONSTRAINT shipping_address_fk FOREIGN KEY (shippingAddressID) REFERENCES public.addresses(id);
 
 
 --
@@ -671,7 +671,7 @@ ALTER TABLE ONLY public.orders
 --
 
 ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT shopping_cart_fk FOREIGN KEY (cart) REFERENCES public.shopping_carts(id);
+    ADD CONSTRAINT shopping_cart_fk FOREIGN KEY (cartID) REFERENCES public.shopping_carts(id);
 
 
 --

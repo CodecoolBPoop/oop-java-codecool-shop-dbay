@@ -1,3 +1,4 @@
+id, name, description, defaultprice, defaultcurrency, productcategory, supplier, bhp, acceleration, modelyear, topspeed
 1,G-Class,none,123600,USD,1,1,536,4.4,2017,137
 2,ML350,none,50700,USD,1,1,254,6.8,2015,140
 3,GLE,none,55700,USD,1,1,384,5.5,2019,155

@@ -1,11 +1,17 @@
 package com.codecool.shop.model;
 
 public class Order {
+    private int id;
     private String sessionId;
     private PersonalInfo personalInfo;
     private Address billingAddress;
     private Address shippingAddress;
     private ShoppingCart cart;
+
+    private int personalInfoID;
+    private int billingAddressID;
+    private int shippingAddressID;
+    private int cartID;
 
     public Order() {
     }
@@ -16,6 +22,46 @@ public class Order {
         this.cart = cart;
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPersonalInfoID() {
+        return personalInfoID;
+    }
+
+    public void setPersonalInfoID(int personalInfoID) {
+        this.personalInfoID = personalInfoID;
+    }
+
+    public int getBillingAddressID() {
+        return billingAddressID;
+    }
+
+    public void setBillingAddressID(int billingAddressID) {
+        this.billingAddressID = billingAddressID;
+    }
+
+    public int getShippingAddressID() {
+        return shippingAddressID;
+    }
+
+    public void setShippingAddressID(int shippingAddressID) {
+        this.shippingAddressID = shippingAddressID;
+    }
+
+    public int getCartID() {
+        return cartID;
+    }
+
+    public void setCartID(int cartID) {
+        this.cartID = cartID;
     }
 
     public PersonalInfo getPersonalInfo() {
