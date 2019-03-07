@@ -54,6 +54,7 @@
 <div class="container">
     <div th:switch="${elements}" class="type">
         <div th:case="'products'" class="categories-name">
+            <a id="back-button" href="/">Back</a>
             <strong th:text="${style}">Category Title</strong><br>
             <select name="filter" id="filter-supplier">
                 <option value="Filter" selected="selected" disabled hidden>Filter</option>
@@ -121,7 +122,6 @@
             </div>
         </div>
     </div>
-
     <div th:replace="footer.html :: copy"></div>
 </body>
 </html>

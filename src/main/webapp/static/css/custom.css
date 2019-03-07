@@ -195,3 +195,15 @@ option, option:hover {
     font-size: 25px;
     padding-right: 5px;
 }
+#back-button{
+    color: white;
+    background-color: darkslategray;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    float: left;
+    margin-top: 15px;
+}
+#back-button:hover {
+    background-color: dimgrey;
+}
