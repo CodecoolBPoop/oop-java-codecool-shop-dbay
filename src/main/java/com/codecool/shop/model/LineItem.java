@@ -6,6 +6,8 @@ public class LineItem{
     private int id;
     private int quantity;
     private Product product;
+    private int productId;
+    private int cartId;
 
     public LineItem() {
         this.id=0;
@@ -38,5 +40,20 @@ public class LineItem{
         this.product = product;
     }
 
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
 
 }

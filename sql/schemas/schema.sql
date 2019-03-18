@@ -384,7 +384,7 @@ COPY public.addresses (id, country, city, zipcode, address) FROM stdin;
 -- Data for Name: line_items; Type: TABLE DATA; Schema: public; Owner: zoli
 --
 
-COPY public.line_items (id, product, quantity, cart) FROM stdin;
+COPY public.line_items (id, productId, quantity, cartId) FROM stdin;
 \.
 
 
@@ -631,7 +631,7 @@ ALTER TABLE ONLY public.orders
 --
 
 ALTER TABLE ONLY public.line_items
-    ADD CONSTRAINT cart_fk FOREIGN KEY (cart) REFERENCES public.shopping_carts(id);
+    ADD CONSTRAINT cart_fk FOREIGN KEY (cartId) REFERENCES public.shopping_carts(id);
 
 
 --
@@ -647,7 +647,7 @@ ALTER TABLE ONLY public.orders
 --
 
 ALTER TABLE ONLY public.line_items
-    ADD CONSTRAINT product_fk FOREIGN KEY (product) REFERENCES public.products(id);
+    ADD CONSTRAINT product_fk FOREIGN KEY (productId) REFERENCES public.products(id);
 
 
 --
