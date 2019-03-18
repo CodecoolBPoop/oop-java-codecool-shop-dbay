@@ -3,9 +3,9 @@ package com.codecool.shop.dao.implementation.database;
 import com.codecool.shop.model.*;
 
 public class WebshopEntityFactory {
-    public static Object getInstanceOfWebshopEntity(Class entityClass){
+    public static Object getInstanceOfWebshopEntity(Class entityDaoClass){
 
-        switch (entityClass.getName()){
+        switch (entityDaoClass.getName()){
             case "com.codecool.shop.dao.implementation.database.ProductCategoryDaoDB":
                 return new ProductCategory();
             case "com.codecool.shop.dao.implementation.database.ProductDaoDB":
