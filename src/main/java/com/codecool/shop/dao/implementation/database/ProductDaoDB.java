@@ -5,6 +5,7 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,14 +54,37 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
 
     @Override
     public List<Product> getAll() {
+        SupplierDaoDB supplierDaoDB = SupplierDaoDB.getInstance();
+        ProductCategoryDaoDB productCategoryDaoDB = ProductCategoryDaoDB.getInstance();
+        ///////////////////////////////////////////////////////////////////////////////
         List<Object> values = executeQuery("SELECT * FROM Products;", null);
-        return getProducts(values);
+        List<Product> products = getProducts(values);
+        List<Supplier> suppliers = supplierDaoDB.getAll();
+        List<ProductCategory> productCategories = productCategoryDaoDB.getAll();
+        ///////////////////////////////////////////////////////////////////////
+        for (Product product: products) {
+            for (Supplier supplier: suppliers) {
+                if(supplier.getId() == product.getSupplierID()) {
+                    product.setSupplier(supplier);
+                    DecimalFormat df = new DecimalFormat("#.0");
+                    product.setAcceleration(Double.parseDouble(df.format(product.getAcceleration())));
+                    break;
+                }
+            }
+            for (ProductCategory productCategory : productCategories) {
+                if (productCategory.getId() == product.getProductCategoryID()) {
+                    product.setProductCategory(productCategory);
+                    break;
+                }
+            }
+        }
+        return products;
     }
 
     @Override
     public List<Product> getBy(Supplier supplier) {
         List<Object> values = new ArrayList<>();
-        values.add(supplier);
+        values.add(supplier.getId());
         List<Object> suppliers = executeQuery("SELECT * FROM Products WHERE supplier=?;", values);
         return getProducts(suppliers);
     }
@@ -68,7 +92,7 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         List<Object> values = new ArrayList<>();
-        values.add(productCategory);
+        values.add(productCategory.getId());
         List<Object> productcategory = executeQuery("SELECT * FROM Products WHERE productcategory=?;", values);
         return getProducts(productcategory);
     }
