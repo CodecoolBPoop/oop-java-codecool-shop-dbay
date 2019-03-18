@@ -34,6 +34,10 @@ public class ShoppingCart {
         return sessionId;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }

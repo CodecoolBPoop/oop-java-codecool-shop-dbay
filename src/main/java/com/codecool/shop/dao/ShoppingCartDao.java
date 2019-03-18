@@ -13,9 +13,9 @@ public interface ShoppingCartDao {
 
     void addToShoppingCart(ShoppingCart shoppingCart, Product product);
 
-//    void addToShoppingCart(String sessionId, Product product);
+    void addToShoppingCart(String sessionId, Product product);
 
     void removeFromShoppingCart(ShoppingCart shoppingCart, Product product);
 
-//    void removeFromShoppingCart(String sessionId, Product product);
+    void removeFromShoppingCart(String sessionId, Product product);
 }

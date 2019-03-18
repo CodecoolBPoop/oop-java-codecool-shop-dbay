@@ -5,9 +5,10 @@ import java.sql.*;
 import java.util.*;
 
 public abstract class DaoDatabase {
-    protected static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop"/*System.getenv("DATABASE")*/;
-    protected static final String DB_USER = "zoli"/*System.getenv("DB_USER")*/;
-    protected static final String DB_PASSWORD = "zoli"/*System.getenv("DB_PASSWORD")*/;
+
+    protected static final String DATABASE = System.getenv().get("DATABASE");
+    protected static final String DB_USER = System.getenv().get("DB_USER");
+    protected static final String DB_PASSWORD =System.getenv().get("DB_PASSWORD");
 
     protected List<Object> executeQuery(String query, List<Object> parameters){
         ResultSet resultSet = null;
