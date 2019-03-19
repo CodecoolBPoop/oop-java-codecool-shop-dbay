@@ -7,7 +7,9 @@ import com.codecool.shop.model.Supplier;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProductDaoDB extends DaoDatabase implements ProductDao {
 
@@ -29,8 +31,8 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
         values.add(product.getDescription());
         values.add(product.getDefaultPrice());
         values.add(product.getDefaultCurrency());
-        values.add(product.getProductCategory());
-        values.add(product.getSupplier());
+        values.add(product.getProductCategoryId());
+        values.add(product.getSupplierId());
         values.add(product.getBhp());
         values.add(product.getAcceleration());
         values.add(product.getModelYear());
@@ -42,7 +44,10 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
     public Product find(int id) {
         List<Object> values = new ArrayList<>();
         values.add(id);
-        return (Product) executeQuery("SELECT * FROM Products WHERE id=?;", values).get(0);
+        Product product = (Product) executeQuery("SELECT * FROM Products WHERE id=?;", values).get(0);
+        product.setProductCategory(ProductCategoryDaoDB.getInstance().find(product.getProductCategoryId()));
+        product.setSupplier(SupplierDaoDB.getInstance().find(product.getSupplierId()));
+        return product;
     }
 
     @Override
@@ -58,13 +63,13 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
         ProductCategoryDaoDB productCategoryDaoDB = ProductCategoryDaoDB.getInstance();
         ///////////////////////////////////////////////////////////////////////////////
         List<Object> values = executeQuery("SELECT * FROM Products;", null);
-        List<Product> products = getProducts(values);
+        List<Product> products = castObjectsToProducts(values);
         List<Supplier> suppliers = supplierDaoDB.getAll();
         List<ProductCategory> productCategories = productCategoryDaoDB.getAll();
         ///////////////////////////////////////////////////////////////////////
         for (Product product: products) {
             for (Supplier supplier: suppliers) {
-                if(supplier.getId() == product.getSupplierID()) {
+                if(supplier.getId() == product.getSupplierId()) {
                     product.setSupplier(supplier);
                     DecimalFormat df = new DecimalFormat("#.0");
                     product.setAcceleration(Double.parseDouble(df.format(product.getAcceleration())));
@@ -72,7 +77,7 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
                 }
             }
             for (ProductCategory productCategory : productCategories) {
-                if (productCategory.getId() == product.getProductCategoryID()) {
+                if (productCategory.getId() == product.getProductCategoryId()) {
                     product.setProductCategory(productCategory);
                     break;
                 }
@@ -85,21 +90,32 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
     public List<Product> getBy(Supplier supplier) {
         List<Object> values = new ArrayList<>();
         values.add(supplier.getId());
-        List<Object> suppliers = executeQuery("SELECT * FROM Products WHERE supplier=?;", values);
-        return getProducts(suppliers);
+        List<Object> objects = executeQuery("SELECT * FROM Products WHERE supplierId=?;", values);
+        List<Product> products = castObjectsToProducts(objects);
+        findAndSetSuppliersAndCategories(products);
+        return products;
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         List<Object> values = new ArrayList<>();
         values.add(productCategory.getId());
-        List<Object> productcategory = executeQuery("SELECT * FROM Products WHERE productcategory=?;", values);
-        return getProducts(productcategory);
+        List<Object> objects = executeQuery("SELECT * FROM Products WHERE productCategoryId=?;", values);
+        List<Product> products = castObjectsToProducts(objects);
+        findAndSetSuppliersAndCategories(products);
+        return products;
     }
 
-    private List<Product> getProducts(List<Object> productcategory) {
+    private void findAndSetSuppliersAndCategories(List<Product> products) {
+        for (Product product: products) {
+            product.setSupplier(SupplierDaoDB.getInstance().find(product.getSupplierId()));
+            product.setProductCategory(ProductCategoryDaoDB.getInstance().find(product.getProductCategoryId()));
+        }
+    }
+
+    private List<Product> castObjectsToProducts(List<Object> uncastedProducts) {
         List<Product> productList = new ArrayList<>();
-        for (Object value : productcategory) {
+        for (Object value : uncastedProducts) {
             if (value instanceof Product) productList.add((Product) value);
         }
         return productList;

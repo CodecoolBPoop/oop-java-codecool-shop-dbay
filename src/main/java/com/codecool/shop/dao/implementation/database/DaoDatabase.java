@@ -66,8 +66,6 @@ public abstract class DaoDatabase {
                                 field.set(obj, resultSet.getString(field.getName()));
                                 break;
                         }
-                    } else {
-                        System.out.println("Field name wasn't in columLabels: " + field.getName());
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

@@ -4,6 +4,7 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.database.ProductCategoryDaoDB;
 import com.codecool.shop.dao.implementation.database.ProductDaoDB;
+import com.codecool.shop.dao.implementation.database.ShoppingCartDaoDB;
 import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
@@ -60,8 +61,8 @@ public class ProductController extends HttpServlet {
         int productId = Integer.parseInt(req.getParameter("addProduct"));
         HttpSession session = req.getSession(true);
         String sessionId = session.getId();
-        Product product = ProductDaoMem.getInstance().find(productId);
-        ShoppingCartDaoMem.getInstance().addToShoppingCart(sessionId, product);
+        Product product = ProductDaoDB.getInstance().find(productId);
+        ShoppingCartDaoDB.getInstance().addToShoppingCart(sessionId, product);
         resp.sendRedirect("/products?style=" + product.getProductCategory().getName());
     }
 

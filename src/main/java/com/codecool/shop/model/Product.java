@@ -1,15 +1,13 @@
 package com.codecool.shop.model;
 
-import java.util.Currency;
-
 public class Product extends BaseModel {
 
     private float defaultPrice;
     private String defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
-    private int supplierID;
-    private int productCategoryID;
+    private int supplierId;
+    private int productCategoryId;
 
     private int bhp;
 
@@ -49,8 +47,8 @@ public class Product extends BaseModel {
 
 
     // GETTERS
-    public int getSupplierID() { return supplierID; }
-    public int getProductCategoryID() { return productCategoryID; }
+    public int getSupplierId() { return supplierId; }
+    public int getProductCategoryId() { return productCategoryId; }
 
     public int getBhp() {
         return bhp;
@@ -66,16 +64,17 @@ public class Product extends BaseModel {
     }
     public float getDefaultPrice() { return defaultPrice; }
     public String getPrice() {
-        String price = Float.toString(this.defaultPrice);
-        price = price.substring(0, price.length() - 2);
-        if (price.length() == 5) {
-            price = price.substring(0, 2) + " " + price.substring(2);
-        } else if (price.length() == 6) {
-            price = price.substring(0, 3) + " " + price.substring(3);
-        } else if (price.length() == 7) {
-            price = price.substring(0, 1) + " " + price.substring(1, 4) + " " + price.substring(4);
-        }
-        return price + " " + this.defaultCurrency.toString();
+//        String price = Float.toString(this.defaultPrice);
+//        price = price.substring(0, price.length() - 2);
+//        if (price.length() == 5) {
+//            price = price.substring(0, 2) + " " + price.substring(2);
+//        } else if (price.length() == 6) {
+//            price = price.substring(0, 3) + " " + price.substring(3);
+//        } else if (price.length() == 7) {
+//            price = price.substring(0, 1) + " " + price.substring(1, 4) + " " + price.substring(4);
+//        }
+//        return price + " " + this.defaultCurrency.toString();
+        return this.defaultPrice + " " + this.defaultCurrency;
     }
     public ProductCategory getProductCategory() { return productCategory; }
     public String getDefaultCurrency() { return defaultCurrency; }

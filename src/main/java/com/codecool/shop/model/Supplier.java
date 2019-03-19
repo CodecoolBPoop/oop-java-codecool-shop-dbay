@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Supplier extends BaseModel {
-    private List<Product> products;
-
-    public Supplier() {
-        this.products = new ArrayList<>();
-    }
+    private List<Product> products = new ArrayList<>();
 
     public Supplier(String name, String description) {
         super(name, description);
