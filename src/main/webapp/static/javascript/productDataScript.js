@@ -6,10 +6,10 @@ function init() {
     //wipeLocalStorage();
     registerButton();
     loginButton();
+    loginAndRegister();
 }
 ///// LOGIN/REGISTER /////
-function registerButton()
-{
+function registerButton() {
     let btn = document.getElementsByClassName('btn-dark')[1];
     btn.addEventListener('click', function () {
         let button = document.getElementById('login-register-btn');
@@ -20,8 +20,7 @@ function registerButton()
     });
 }
 
-function loginButton()
-{
+function loginButton() {
     let username = document.getElementById('exampleInputUsername1');
     username.classList.add('display-off');
     let btn = document.getElementsByClassName('btn-dark')[0];
@@ -32,6 +31,37 @@ function loginButton()
         username.classList.remove('display-on');
         username.classList.add('display-off');
     });
+}
+
+function loginAndRegister() {
+    const btn = document.getElementById('login-register-btn');
+    btn.addEventListener('click',function () {
+        const action = document.getElementById('login-register-btn').textContent;
+        if (action === 'Register') {
+            const username = document.getElementById('exampleInputUsername1').value;
+            const email = document.getElementById('exampleInputEmail1').value;
+            const password = document.getElementById('exampleInputPassword1').value;
+            $.ajax({
+                method: "POST",
+                url: "/register",
+                data: { username: username, email: email, password:password }
+            })
+                .done(function(msg) {
+                    location.reload();
+                });
+        } else {
+            const email = document.getElementById('exampleInputEmail1').value;
+            const password = document.getElementById('exampleInputPassword1').value;
+            $.ajax({
+                method: "POST",
+                url: "/login",
+                data: { email: email, password:password }
+            })
+                .done(function() {
+                    location.reload();
+                });
+        }
+    })
 }
 
 ///// CARD NUMBER /////

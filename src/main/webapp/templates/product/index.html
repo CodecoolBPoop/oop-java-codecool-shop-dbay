@@ -109,7 +109,7 @@
                         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
                     <div class="submit-btn">
-                        <button type="submit" class="btn btn-dark" id="login-register-btn">Login</button>
+                        <button type="button" class="btn btn-dark" id="login-register-btn">Login</button>
                     </div>
                 </form>
             </div>
@@ -124,7 +124,7 @@
 <div class="container">
     <div th:switch="${elements}" class="type">
         <div th:case="'products'" class="categories-name">
-            <a id="back-button" href="/">Back</a>
+            <a class="back-button" href="/">Back</a>
             <span id="filter-title" th:text="${style}">Category Title</span><br>
             <select name="filter" id="filter-supplier">
                 <option value="Filter" selected="selected" disabled hidden>Filter</option>
@@ -163,7 +163,7 @@
                                 <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                             </div>
                             <div class="card-text">
-                                <form method="post" th:action="'products?style=' + ${style}">
+                                <form th:if="${userName != 'Not logged in!'}" method="post" th:action="'products?style=' + ${style}">
                                     <button class="card-btn" name="addProduct" th:value="${prod.getId()}">Add to cart</button>
                                     <select name="qty" class="quantity">
                                         <option class="options" value="1">1</option>
@@ -173,6 +173,14 @@
                                         <option class="options" value="5">5</option>
                                     </select>
                                 </form>
+                                <button th:if="${userName == 'Not logged in!'}" class="card-btn" data-toggle="modal" data-target="#exampleModalCenter">Add to cart</button>
+                                <select th:if="${userName == 'Not logged in!'}" name="qty" class="quantity">
+                                    <option class="options" value="1">1</option>
+                                    <option class="options" value="2">2</option>
+                                    <option class="options" value="3">3</option>
+                                    <option class="options" value="4">4</option>
+                                    <option class="options" value="5">5</option>
+                                </select>
                             </div>
                         </div>
                     </div>

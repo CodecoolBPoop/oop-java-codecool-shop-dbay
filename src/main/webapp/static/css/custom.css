@@ -213,7 +213,7 @@ option, option:hover {
     float: right;
     padding-right: 35px;
 }
-#back-button{
+.back-button{
     color: white;
     background-color: darkslategray;
     padding: 5px 10px;
@@ -221,6 +221,11 @@ option, option:hover {
     font-weight: bold;
     float: left;
     margin-top: 15px;
+}
+.back-button:hover {
+    color: white;
+    background-color: dimgrey;
+    cursor: pointer;
 }
 #back-button:hover {
     background-color: dimgrey;
