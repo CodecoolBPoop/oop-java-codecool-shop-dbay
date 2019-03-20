@@ -42,6 +42,10 @@
 <body>
 <nav id="navbar">
     <ul id="navbar-ul">
+        <li class="navbar-item navbar-label-title">
+            <span>cBay</span>
+            <span>|</span>
+        </li>
         <li class="navbar-item">
             <span class="navbar-username" th:text="${userName}">Username...</span>
         </li>
@@ -57,16 +61,13 @@
                 <span class="navbar-label">Login</span>
             </a>
         </li>
-        <!--<li class="navbar-item">-->
-            <!--<a class="navbar-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">-->
-                <!--<span class="navbar-reglabel"><i class="fas fa-registered"></i>egister</span>-->
-            <!--</a>-->
-        <!--</li>-->
-        <li class="navbar-item navbar-center">
-            <span class="navbar-label-title">cBay</span>
-        </li>
-        <li class="navbar-item navbar-right">
-            <a class="navbar-link" id="cart-pictogram" href="#">
+        <li class="navbar-item navbar-right" th:switch="${userName}">
+            <a class="navbar-link" th:case="'Not logged in!'" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                <span class="navbar-label">Cart</span>
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge badge-danger">11</span>
+            </a>
+            <a class="navbar-link" th:case="*" href="/">
                 <span class="navbar-label">Cart</span>
                 <i class="fas fa-shopping-cart"></i>
                 <span class="badge badge-danger">11</span>

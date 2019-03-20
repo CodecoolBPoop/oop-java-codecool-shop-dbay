@@ -3,7 +3,7 @@ function init() {
     initialiseDropdown();
     //initialiseAddToCartBtn();
     //initialiseCartNumber();
-    // wipeLocalStorage();
+    //wipeLocalStorage();
     registerButton();
     loginButton();
 }

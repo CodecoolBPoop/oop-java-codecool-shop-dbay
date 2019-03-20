@@ -23,9 +23,9 @@ public class LoginController extends HttpServlet {
             LoginDao loginDao = LoginDaoDB.getInstance();
             List<User> userList = loginDao.getUser(password);
             if (checkUser(userList, password, email)) {
-                HttpSession session = req.getSession(true);
-                session.setAttribute("username", userList.get(0));
-                session.setAttribute("id", userList.get(0));
+                Cookie usernameCookie = new Cookie("username", userList.get(0).username);
+                usernameCookie.setMaxAge(60*60*24*365);
+                resp.addCookie(usernameCookie);
                 resp.sendRedirect("/");
             } else {
                 resp.sendRedirect("/");

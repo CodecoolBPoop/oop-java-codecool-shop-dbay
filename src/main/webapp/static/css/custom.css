@@ -204,15 +204,14 @@ option, option:hover {
 .navbar-item {
     display: inline-block;
 }
-.navbar-right {
-    float: right;
-    padding-right: 35px;
-}
-.navbar-center {
-    padding-left: 40%;
+.navbar-label-title {
     color: white;
     font-weight: bold;
     cursor: default;
+}
+.navbar-right {
+    float: right;
+    padding-right: 35px;
 }
 #back-button{
     color: white;
