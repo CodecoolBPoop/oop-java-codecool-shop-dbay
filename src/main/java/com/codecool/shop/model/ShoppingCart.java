@@ -34,6 +34,9 @@ public class ShoppingCart {
 
     public void setLineItems(List<LineItem> lineItems) {
         this.lineItems = lineItems;
+        for (LineItem lineItem: this.lineItems) {
+            this.totalPrice+=lineItem.getQuantity()*lineItem.getProduct().getDefaultPrice();
+        }
     }
 
     public String getSessionId() {

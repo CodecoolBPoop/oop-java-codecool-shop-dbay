@@ -45,17 +45,17 @@ public class ShoppingCartDaoDB extends DaoDatabase implements ShoppingCartDao {
         List<Object> values = new ArrayList<>();
         values.add(sessionId);
         values.add(0.0f);
-        executeQuery("INSERT INTO shopping_carts (sessionId, totalPrice) VALUES (?, ?)", values);
+        executeQuery("INSERT INTO shopping_carts (\"sessionId\", \"totalPrice\") VALUES (?, ?)", values);
         return new ShoppingCart(sessionId);
     }
 
     public void deleteShoppingCart(String sessionId) {
         List<Object> values1 = new ArrayList<>();
         values1.add(getShoppingCart(sessionId).getId());
-        executeQuery("DELETE FROM line_items WHERE cartId=?", values1);
+        executeQuery("DELETE FROM line_items WHERE \"cartId\"=?", values1);
         List<Object> values2 = new ArrayList<>();
         values2.add(sessionId);
-        executeQuery("DELETE FROM Shopping_carts WHERE sessionId=?;", values2);
+        executeQuery("DELETE FROM Shopping_carts WHERE \"sessionId\"=?;", values2);
     }
 
     public ShoppingCart getShoppingCart(String sessionId) {
@@ -93,9 +93,9 @@ public class ShoppingCartDaoDB extends DaoDatabase implements ShoppingCartDao {
             if(matchingLineItem!=null){
                 shoppingCart.addToShoppingCart(product);
                 List<Object> values=new ArrayList<>();
-                values.add(matchingLineItem.getQuantity()+1);
+                values.add(matchingLineItem.getQuantity());
                 values.add(matchingLineItem.getId());
-                executeQuery("UPDATE line_items SET quantity=? WHERE id=?;", values);
+                executeQuery("UPDATE line_items SET \"quantity\"=? WHERE \"id\"=?;", values);
             } else {
                 shoppingCart.addToShoppingCart(product);
 
@@ -103,7 +103,7 @@ public class ShoppingCartDaoDB extends DaoDatabase implements ShoppingCartDao {
                 values.add(product.getId());
                 values.add(1);
                 values.add(shoppingCart.getId());
-                executeQuery("INSERT INTO line_items (productId, quantity, cartId) VALUES (?, ?, ?);", values);
+                executeQuery("INSERT INTO line_items (\"productId\", \"quantity\", \"cartId\") VALUES (?, ?, ?);", values);
             }
         } else {
             shoppingCart = createShoppingCart(sessionId);
@@ -132,7 +132,7 @@ public class ShoppingCartDaoDB extends DaoDatabase implements ShoppingCartDao {
                         List<Object> values = new ArrayList<>();
                         values.add(shoppingCart.getId());
                         values.add(product.getId());
-                        executeQuery("DELETE FROM line_items WHERE cartId=? AND productId=?", values);
+                        executeQuery("DELETE FROM line_items WHERE \"cartId\"=? AND \"productId\"=?", values);
                     } else {
                         List<Object> values = new ArrayList<>();
                         values.add(matchingLineItem.getQuantity()-1);
