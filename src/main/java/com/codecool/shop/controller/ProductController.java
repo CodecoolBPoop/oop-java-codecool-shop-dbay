@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.SessionChecker;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.database.ProductCategoryDaoDB;
@@ -9,6 +10,7 @@ import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.memory.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -31,16 +33,15 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoDB.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoDB.getInstance();
 
-//        Map params = new HashMap<>();
-//        params.put("category", productCategoryDataStore.find(1));
-//        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-
         String elements = "products";
         String style = req.getParameter("style");
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-//        context.setVariables(params);
         String[] categoriesArray = {"Crossovers", "Hatchbacks", "Sedans", "Convertibles", "Vans", "Trucks", "Minivans", "Sport cars"};
+
+        //// CHECK USER ////
+        HttpSession session = req.getSession();
+        User user = SessionChecker.checkUser(session);
 
         // Get elements for the dropdown list.
         List<Product> allProducts = productDataStore.getAll();
@@ -53,6 +54,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("style", style);
         context.setVariable("categoriesArray", categoriesArray);
         context.setVariable("dropdown", dropdownElements);
+        context.setVariable("userName", user.username);
         engine.process("product/index.html", context, resp.getWriter());
     }
 

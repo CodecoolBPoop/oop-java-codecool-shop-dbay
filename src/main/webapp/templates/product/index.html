@@ -14,6 +14,9 @@
     <!--JavaScript-->
     <script src="static/javascript/productDataScript.js" defer></script>
     <!-- Bootstrap components -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -37,25 +40,91 @@
 </head>
 
 <body>
-<span id="shopping-cart-number"></span>
-<div class="shopping-cart">
-    <form action="shoppingCart.html" method="post">
-    <a id="shopping-cart-link" href="/shopping-cart">
-        <i id="shopping-cart-pictogram" class="fas fa-shopping-cart fa-2x"></i>
-    </a>
-    </form>
+<nav id="navbar">
+    <ul id="navbar-ul">
+        <li class="navbar-item">
+            <span class="navbar-username" th:text="${userName}">Username...</span>
+        </li>
+        <li class="navbar-item" th:if="${userName != 'Not logged in!'}">
+            <a class="navbar-link" href="/logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="navbar-label">Logout</span>
+            </a>
+        </li>
+        <li class="navbar-item" th:if="${userName == 'Not logged in!'}">
+            <a class="navbar-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fas fa-sign-in-alt"></i>
+                <span class="navbar-label">Login</span>
+            </a>
+        </li>
+        <!--<li class="navbar-item">-->
+            <!--<a class="navbar-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">-->
+                <!--<span class="navbar-reglabel"><i class="fas fa-registered"></i>egister</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <li class="navbar-item navbar-center">
+            <span class="navbar-label-title">cBay</span>
+        </li>
+        <li class="navbar-item navbar-right">
+            <a class="navbar-link" id="cart-pictogram" href="#">
+                <span class="navbar-label">Cart</span>
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge badge-danger">11</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-dark active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked=""> Login
+                    </label>
+                    <label class="btn btn-dark">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Register
+                    </label>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" th:action="'/login'">
+                    <div id="alert-text"></div>
+                    <div class="alert alert-dismissible alert-danger" hidden>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Invalid E-mail or password!</strong>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" id="exampleInputUsername1" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name ="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="submit-btn">
+                        <button type="submit" class="btn btn-dark" id="login-register-btn">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Modal end -->
 <div class="jumbotron text-center">
-    <!--<img id="header" src="/static/web_image/header.jpg" alt=""/>-->
-    <!--<img id="logo-image" src="http://placehold.it/400x250/000/fff" th:attr="src='../web_image/website-header.jpg'" alt="" />-->
-    <h1 id="logo-text">cBay</h1>
+    <img id="logo-image" src="http://placehold.it/400x250/000/fff" th:attr="src='../web_image/website-header.jpg'" alt="" />
+    <!--<h1 id="logo-text">cBay</h1>-->
 </div>
-
 <div class="container">
     <div th:switch="${elements}" class="type">
         <div th:case="'products'" class="categories-name">
             <a id="back-button" href="/">Back</a>
-            <strong th:text="${style}">Category Title</strong><br>
+            <span id="filter-title" th:text="${style}">Category Title</span><br>
             <select name="filter" id="filter-supplier">
                 <option value="Filter" selected="selected" disabled hidden>Filter</option>
                 <option value="All">All</option>
@@ -64,7 +133,7 @@
                 </th:block>
             </select>
         </div>
-        <div th:case="'categories'" class="categories-name">
+        <div th:case="'categories'" id="category-list-names">
             <strong class="category-card" th:text="'Categories'">Category Title</strong>
         </div>
     </div>

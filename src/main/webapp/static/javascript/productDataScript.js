@@ -1,10 +1,39 @@
 
 function init() {
     initialiseDropdown();
-    initialiseAddToCartBtn();
-    initialiseCartNumber();
+    //initialiseAddToCartBtn();
+    //initialiseCartNumber();
     // wipeLocalStorage();
+    registerButton();
+    loginButton();
 }
+///// LOGIN/REGISTER /////
+function registerButton()
+{
+    let btn = document.getElementsByClassName('btn-dark')[1];
+    btn.addEventListener('click', function () {
+        let button = document.getElementById('login-register-btn');
+        button.innerText = 'Register';
+        let username = document.getElementById('exampleInputUsername1');
+        username.classList.remove('display-off');
+        username.classList.add('display-on');
+    });
+}
+
+function loginButton()
+{
+    let username = document.getElementById('exampleInputUsername1');
+    username.classList.add('display-off');
+    let btn = document.getElementsByClassName('btn-dark')[0];
+    btn.addEventListener('click', function () {
+        let button = document.getElementById('login-register-btn');
+        button.innerText = 'Login';
+        let username = document.getElementById('exampleInputUsername1');
+        username.classList.remove('display-on');
+        username.classList.add('display-off');
+    });
+}
+
 ///// CARD NUMBER /////
 function initialiseCartNumber() {
     const number = document.getElementById("shopping-cart-number");

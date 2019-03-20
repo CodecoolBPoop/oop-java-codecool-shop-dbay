@@ -15,12 +15,9 @@ public abstract class DaoDatabase {
         boolean hasResult;
 
         try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)){
-
+            PreparedStatement statement = connection.prepareStatement(query)){
             setQueryValues(statement, parameters);
-
             hasResult = statement.execute();
-
             //Getting and mapping results if there is a resultSet
             if(hasResult){
                 resultList = mapQueryToObjectList(statement.getResultSet());
@@ -43,15 +40,12 @@ public abstract class DaoDatabase {
     protected List<Object> mapQueryToObjectList(ResultSet resultSet) throws SQLException{
         LinkedHashMap<String, String> columnLabelsAndTypes = getColumnsAndTypes(resultSet.getMetaData());
         List<Object> webshopEntityList = new ArrayList<>();
-
         while(resultSet.next()){
             Object obj = WebshopEntityFactory.getInstanceOfWebshopEntity(this.getClass());
             List<Field> fields = getEveryField(obj);
-
             for (Field field : fields) {
                 boolean accessible = field.isAccessible();
                 field.setAccessible(true);
-
                 try{
                     if(columnLabelsAndTypes.containsKey(field.getName())){
                         switch (columnLabelsAndTypes.get(field.getName())){
@@ -86,13 +80,10 @@ public abstract class DaoDatabase {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-
-
                 field.setAccessible(accessible);
             }
             webshopEntityList.add(obj);
         }
-
         return webshopEntityList;
     }
 
