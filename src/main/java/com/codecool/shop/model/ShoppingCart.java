@@ -2,14 +2,16 @@ package com.codecool.shop.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCart {
 
     private int id;
-    private ArrayList<LineItem> lineItems = new ArrayList<>();
+
+    private List<LineItem> lineItems = new ArrayList<>();
+
     private String sessionId;
     private float totalPrice;
-
 
     public String getTotalPrice() {
         return round(this.totalPrice, 2) + " USD";
@@ -26,8 +28,12 @@ public class ShoppingCart {
         this.totalPrice = 0.0f;
     }
 
-    public ArrayList<LineItem> getLineItems() {
+    public List<LineItem> getLineItems() {
         return lineItems;
+    }
+
+    public void setLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
     }
 
     public String getSessionId() {
@@ -51,7 +57,7 @@ public class ShoppingCart {
             }
         }
         if(alreadyExists!=true){
-            lineItems.add(new LineItem(product));
+            lineItems.add(new LineItem(product, this.id));
         }
         totalPrice+=product.getDefaultPrice();
     }

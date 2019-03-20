@@ -6,15 +6,16 @@ public class Product extends BaseModel {
     private String defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
-    private int supplierId;
-    private int productCategoryId;
 
+    private int supplierId;
+
+    private int productCategoryId;
     private int bhp;
 
     private double acceleration;
+
     private int modelYear;
     private int topSpeed;
-
     public Product(String name, int topSpeed, double acceleration, int bhp, int modelYear, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
@@ -28,6 +29,7 @@ public class Product extends BaseModel {
 
     public Product() {
     }
+
 
 //    @Override
 //    public String toString() {
@@ -45,14 +47,14 @@ public class Product extends BaseModel {
 //                this.supplier.getName());
 //    }
 
-
     // GETTERS
+
     public int getSupplierId() { return supplierId; }
     public int getProductCategoryId() { return productCategoryId; }
-
     public int getBhp() {
         return bhp;
     }
+
     public double getAcceleration() {
         return acceleration;
     }
@@ -94,5 +96,11 @@ public class Product extends BaseModel {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
         this.supplier.addProduct(this);
+    }
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
+    }
+    public void setProductCategoryId(int productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 }

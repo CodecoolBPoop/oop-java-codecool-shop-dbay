@@ -32,7 +32,11 @@ public class ProductCategoryDaoDB extends DaoDatabase implements ProductCategory
     public ProductCategory find(int id) {
         List<Object> values = new ArrayList<>();
         values.add(id);
-        return (ProductCategory) executeQuery("SELECT * FROM product_categories WHERE id=?;", values).get(0);
+        try{
+            return (ProductCategory) executeQuery("SELECT * FROM product_categories WHERE id=?;", values).get(0);
+        } catch (IndexOutOfBoundsException|NullPointerException e){
+            return null;
+        }
     }
 
     @Override
@@ -45,10 +49,10 @@ public class ProductCategoryDaoDB extends DaoDatabase implements ProductCategory
     @Override
     public List<ProductCategory> getAll() {
         List<Object> values = executeQuery("SELECT * FROM product_categories;", null);
-        List<ProductCategory> categoryListList = new ArrayList<>();
+        List<ProductCategory> productCategories = new ArrayList<>();
         for (Object value: values) {
-            if(value instanceof ProductCategory) categoryListList.add((ProductCategory)value);
+            if(value instanceof ProductCategory) productCategories.add((ProductCategory)value);
         }
-        return categoryListList;
+        return productCategories;
     }
 }

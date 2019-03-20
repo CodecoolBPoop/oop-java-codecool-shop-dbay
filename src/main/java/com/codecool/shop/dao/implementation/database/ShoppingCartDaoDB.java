@@ -10,12 +10,21 @@ import java.util.List;
 
 public class ShoppingCartDaoDB extends DaoDatabase implements ShoppingCartDao {
 
-    private class LineItemDao {
+    private class LineItemDaoDB extends DaoDatabase {
 
-        private LineItem find(String sessionId) {
+        private List<LineItem> find(int cartId) {
             List<Object> values = new ArrayList<>();
-            values.add(sessionId);
-            return (LineItem) executeQuery("SELECT * FROM line_items WHERE session_id=?;", values).get(0);
+            values.add(cartId);
+            List<Object> objects = executeQuery("SELECT * FROM line_items WHERE \"cartId\"=?;", values);
+            List<LineItem> lineItems = new ArrayList<>();
+            for (Object object: objects) {
+                if(object instanceof LineItem){
+                    LineItem lineItem = (LineItem) object;
+                    lineItem.setProduct(ProductDaoDB.getInstance().find(lineItem.getProductId()));
+                    lineItems.add(lineItem);
+                }
+            }
+            return lineItems;
         }
 
     }
@@ -34,85 +43,105 @@ public class ShoppingCartDaoDB extends DaoDatabase implements ShoppingCartDao {
 
     public ShoppingCart createShoppingCart(String sessionId) {
         List<Object> values = new ArrayList<>();
-        if (sessionId.equals(getShoppingCart(sessionId))) {
-            values.add(sessionId);
-        }
-        return (ShoppingCart) values;
+        values.add(sessionId);
+        values.add(0.0f);
+        executeQuery("INSERT INTO shopping_carts (sessionId, totalPrice) VALUES (?, ?)", values);
+        return new ShoppingCart(sessionId);
     }
 
     public void deleteShoppingCart(String sessionId) {
-        List<Object> values = new ArrayList<>();
-        values.add(sessionId);
-        executeQuery("DELETE FROM Shopping_carts WHERE sessionid=?;", values);
+        List<Object> values1 = new ArrayList<>();
+        values1.add(getShoppingCart(sessionId).getId());
+        executeQuery("DELETE FROM line_items WHERE cartId=?", values1);
+        List<Object> values2 = new ArrayList<>();
+        values2.add(sessionId);
+        executeQuery("DELETE FROM Shopping_carts WHERE sessionId=?;", values2);
     }
 
     public ShoppingCart getShoppingCart(String sessionId) {
         List<Object> values = new ArrayList<>();
         values.add(sessionId);
-        ShoppingCart shoppingCart = (ShoppingCart) executeQuery(
-                "SELECT * FROM shopping_carts JOIN line_items " +
-                        "ON shopping_carts.id=line_items.cartId " +
-                        "WHERE shopping_cart.session_id=?;", values);
+        ShoppingCart cart;
+        try{
+            cart = (ShoppingCart) executeQuery("SELECT * FROM shopping_carts WHERE \"sessionId\"=?;", values).get(0);
+            LineItemDaoDB lineItemDaoDB = new LineItemDaoDB();
+            List<LineItem> lineItems = lineItemDaoDB.find(cart.getId());
+            cart.setLineItems(lineItems);
+        } catch (Exception e) {
+            cart = null;
+        }
 
-        return shoppingCart;
+        return cart;
 
     }
 
     public void addToShoppingCart(ShoppingCart shoppingCart, Product product) {
-        List<Object> values = new ArrayList<>();
-        values.add(shoppingCart.getSessionId());
-        values.add(shoppingCart.getTotalPrice());
-        executeQuery("INSERT INTO shopping_cart (sessionid, totalprice) VALUES (?, ?);", values);
+        addToShoppingCart(shoppingCart.getSessionId(), product);
     }
 
     public void addToShoppingCart(String sessionId, Product product) {
-        List<Object> values1 = new ArrayList<>();
-        List<Object> values2 = new ArrayList<>();
-        List<Object> values3 = new ArrayList<>();
-        List<Object> values4 = new ArrayList<>();
-        ShoppingCart shoppingCart = null;
-        values1.add(sessionId);
-        try {
-            shoppingCart = (ShoppingCart) executeQuery("SELECT * FROM shopping_carts WHERE sessionid=?;", values1).get(0);
-        } catch (Exception ex) {
-        }
+        ShoppingCart shoppingCart = getShoppingCart(sessionId);
         if (shoppingCart != null) {
-            int productQuantity;
-            values2.add(shoppingCart.getId());
-            values2.add(product.getId());
-            executeQuery("SELECT * FROM line_items WHERE cartId=? AND productId=?;", values2 );
-            if (shoppingCart.getLineItems().size() != 0) {
-                for (LineItem item : shoppingCart.getLineItems()) {
-                    if (item.getProductId() == product.getId()) {
-                        productQuantity = item.getQuantity();
-                        values3.add(productQuantity + 1);
-                        executeQuery("UPDATE line_items SET quantity=?", values3);
-                        break;
-                    }
+            LineItemDaoDB lineItemDaoDB = new LineItemDaoDB();
+            LineItem matchingLineItem=null;
+            for (LineItem lineItem: shoppingCart.getLineItems()) {
+                if(lineItem.getProductId()==product.getId()){
+                    matchingLineItem = lineItem;
+                    break;
                 }
+            }
+            if(matchingLineItem!=null){
+                shoppingCart.addToShoppingCart(product);
+                List<Object> values=new ArrayList<>();
+                values.add(matchingLineItem.getQuantity()+1);
+                values.add(matchingLineItem.getId());
+                executeQuery("UPDATE line_items SET quantity=? WHERE id=?;", values);
             } else {
                 shoppingCart.addToShoppingCart(product);
-                values4.add(product.getId());
-                values4.add(shoppingCart.getId());
-                values4.add(sessionId);
-                executeQuery("INSERT INTO line_items (productId, quantity, cartId, sessionId) VALUES (?, 1, ?, ?)", values4);
+
+                List<Object> values = new ArrayList<>();
+                values.add(product.getId());
+                values.add(1);
+                values.add(shoppingCart.getId());
+                executeQuery("INSERT INTO line_items (productId, quantity, cartId) VALUES (?, ?, ?);", values);
             }
-        }
-        else {
-            shoppingCart = new ShoppingCart();
+        } else {
+            shoppingCart = createShoppingCart(sessionId);
+            addToShoppingCart(shoppingCart.getSessionId(), product);
         }
     }
 
     public void removeFromShoppingCart(ShoppingCart shoppingCart, Product product) {
-        List<Object> values = new ArrayList<>();
-        values.add(shoppingCart.getSessionId());
-        values.add(shoppingCart.getLineItems());
-        executeQuery("DELETE FROM shopping_carts WHERE sessionid=?;", values);
+        removeFromShoppingCart(shoppingCart.getSessionId(), product);
     }
 
     public void removeFromShoppingCart(String sessionId, Product product) {
-//        List<Object> values = new ArrayList<>();
-//        values.add(sessionId);
-//        executeQuery("DELETE FROM Shopping_carts WHERE sessionid=?;", values);
+        ShoppingCart shoppingCart = getShoppingCart(sessionId);
+        LineItemDaoDB lineItemDaoDB = new LineItemDaoDB();
+        if(shoppingCart!=null){
+            LineItem matchingLineItem = null;
+            List<LineItem> lineItems = lineItemDaoDB.find(shoppingCart.getId());
+            if(lineItems!=null){
+                for (LineItem lineItem: lineItems) {
+                    if(lineItem.getProductId() == product.getId()){
+                        matchingLineItem = lineItem;
+                    }
+                }
+                if(matchingLineItem!=null){
+                    if(matchingLineItem.getQuantity()==1){
+                        List<Object> values = new ArrayList<>();
+                        values.add(shoppingCart.getId());
+                        values.add(product.getId());
+                        executeQuery("DELETE FROM line_items WHERE cartId=? AND productId=?", values);
+                    } else {
+                        List<Object> values = new ArrayList<>();
+                        values.add(matchingLineItem.getQuantity()-1);
+                        values.add(matchingLineItem.getId());
+                        executeQuery("UPDATE line_items SET quantity=? WHERE id=?", values);
+                    }
+                    shoppingCart.removeFromShoppingCart(product);
+                }
+            }
+        }
     }
 }

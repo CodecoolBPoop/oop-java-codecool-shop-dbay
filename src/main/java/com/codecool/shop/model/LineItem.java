@@ -4,24 +4,30 @@ import java.text.DecimalFormat;
 
 public class LineItem{
     private int id;
+
     private int quantity;
     private Product product;
     private int productId;
     private int cartId;
-
     public LineItem() {
         this.id=0;
     }
 
     public LineItem(Product product) {
         this.product = product;
+        this.productId=product.getId();
         this.quantity = 1;
         this.id=0;
     }
 
+    public LineItem(Product product, int cartId) {
+        this(product);
+        this.cartId=cartId;
+    }
+
     public LineItem(int quantity, Product product) {
-        this.quantity = quantity;
-        this.product = product;
+        this(product);
+        this.quantity=quantity;
     }
 
     public int getQuantity() {
@@ -56,4 +62,12 @@ public class LineItem{
         this.cartId = cartId;
     }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

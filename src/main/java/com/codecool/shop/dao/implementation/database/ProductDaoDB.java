@@ -37,16 +37,20 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
         values.add(product.getAcceleration());
         values.add(product.getModelYear());
         values.add(product.getTopSpeed());
-        executeQuery("INSERT INTO Products (name, description, defaultprice, defaultcurrency, productcategory, supplier, bhp, acceleration, modelyear, topspeed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", values);
+        executeQuery("INSERT INTO Products (\"name\", \"description\", \"defaultPrice\", \"defaultCurrency\", \"productCategoryId\", \"supplierId\", \"bhp\", \"acceleration\", \"modelYear\", \"topSpeed\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", values);
     }
 
     @Override
     public Product find(int id) {
         List<Object> values = new ArrayList<>();
         values.add(id);
-        Product product = (Product) executeQuery("SELECT * FROM Products WHERE id=?;", values).get(0);
-        product.setProductCategory(ProductCategoryDaoDB.getInstance().find(product.getProductCategoryId()));
-        product.setSupplier(SupplierDaoDB.getInstance().find(product.getSupplierId()));
+        Product product = null;
+        try{
+            product = (Product) executeQuery("SELECT * FROM Products WHERE id=?;", values).get(0);
+            product.setProductCategory(ProductCategoryDaoDB.getInstance().find(product.getProductCategoryId()));
+            product.setSupplier(SupplierDaoDB.getInstance().find(product.getSupplierId()));
+        } catch (IndexOutOfBoundsException e){
+        }
         return product;
     }
 
@@ -88,28 +92,37 @@ public class ProductDaoDB extends DaoDatabase implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier supplier) {
+        if(supplier==null) return null;
         List<Object> values = new ArrayList<>();
         values.add(supplier.getId());
-        List<Object> objects = executeQuery("SELECT * FROM Products WHERE supplierId=?;", values);
+        List<Object> objects = executeQuery("SELECT * FROM Products WHERE \"supplierId\"=?;", values);
+        if(objects == null) return null;
         List<Product> products = castObjectsToProducts(objects);
+        for (Product product: products) {
+            product.setSupplier(supplier);
+        }
         findAndSetSuppliersAndCategories(products);
         return products;
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
+        if(productCategory==null) return null;
         List<Object> values = new ArrayList<>();
         values.add(productCategory.getId());
-        List<Object> objects = executeQuery("SELECT * FROM Products WHERE productCategoryId=?;", values);
+        List<Object> objects = executeQuery("SELECT * FROM Products WHERE \"productCategoryId\"=?;", values);
         List<Product> products = castObjectsToProducts(objects);
+        for (Product product: products) {
+            product.setProductCategory(productCategory);
+        }
         findAndSetSuppliersAndCategories(products);
         return products;
     }
 
     private void findAndSetSuppliersAndCategories(List<Product> products) {
         for (Product product: products) {
-            product.setSupplier(SupplierDaoDB.getInstance().find(product.getSupplierId()));
-            product.setProductCategory(ProductCategoryDaoDB.getInstance().find(product.getProductCategoryId()));
+            if(product.getSupplier()==null) product.setSupplier(SupplierDaoDB.getInstance().find(product.getSupplierId()));
+            if(product.getProductCategory()==null) product.setProductCategory(ProductCategoryDaoDB.getInstance().find(product.getProductCategoryId()));
         }
     }
 
