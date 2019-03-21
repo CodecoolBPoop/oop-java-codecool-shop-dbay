@@ -38,7 +38,6 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
-
 <body>
 <nav id="navbar">
     <ul id="navbar-ul">
@@ -50,9 +49,9 @@
             <span class="navbar-username" th:text="${userName}">Username...</span>
         </li>
         <li class="navbar-item" th:if="${userName != 'Not logged in!'}">
-            <a class="navbar-link" href="/logout">
+            <a class="navbar-link" href="#">
                 <i class="fas fa-sign-out-alt"></i>
-                <span class="navbar-label">Logout</span>
+                <span class="navbar-label" id="logout">Logout</span>
             </a>
         </li>
         <li class="navbar-item" th:if="${userName == 'Not logged in!'}">
@@ -75,7 +74,8 @@
         </li>
     </ul>
 </nav>
-<!-- Modal -->
+
+<!-- Modal Login/Register -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -95,9 +95,11 @@
             <div class="modal-body">
                 <form method="post" th:action="'/login'">
                     <div id="alert-text"></div>
-                    <div class="alert alert-dismissible alert-danger" hidden>
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <div class="alert alert-dismissible alert-danger display-off" id="alert-login">
                         <strong>Invalid E-mail or password!</strong>
+                    </div>
+                    <div class="alert alert-dismissible alert-danger display-off" id="alert-register">
+                        <strong>E-mail or password already in use!</strong>
                     </div>
                     <div class="form-group">
                         <input type="text" name="username" class="form-control" id="exampleInputUsername1" placeholder="Username">
@@ -116,7 +118,7 @@
         </div>
     </div>
 </div>
-<!-- Modal end -->
+<!-- Modal Login/Register end -->
 <div class="jumbotron text-center">
     <img id="logo-image" src="http://placehold.it/400x250/000/fff" th:attr="src='../web_image/website-header.jpg'" alt="" />
     <!--<h1 id="logo-text">cBay</h1>-->

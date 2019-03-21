@@ -20,13 +20,16 @@ public class RegisterController extends HttpServlet {
 
         if (email != null && password != null && username != null) {
             RegisterDao registerDao = RegisterDaoDB.getInstance();
-            registerDao.addUser(username,password,email);
-            Cookie usernameCookie = new Cookie("username", username);
-            usernameCookie.setMaxAge(60*60*24*365);
-            resp.addCookie(usernameCookie);
-            resp.sendRedirect("/");
+            if (registerDao.getUser(email) == null) {
+                registerDao.addUser(username,password,email);
+                Cookie usernameCookie = new Cookie("username", username);
+                usernameCookie.setMaxAge(60*60*24*365);
+                resp.addCookie(usernameCookie);
+            } else {
+                resp.sendError(1,"Error");
+            }
         } else {
-            resp.sendRedirect("/");
+            resp.sendError(1, "Error");
         }
     }
 }

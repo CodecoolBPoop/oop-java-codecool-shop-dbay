@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet {
                 resp.addCookie(usernameCookie);
                 resp.sendRedirect("/");
             } else {
-                resp.sendRedirect("/");
+                resp.sendError(1, "Error");
             }
         } else {
             resp.sendRedirect("/");
@@ -37,6 +37,9 @@ public class LoginController extends HttpServlet {
     }
 
     public boolean checkUser(List<User> userList, String passwordInput, String emailInput) {
+        if (userList.size() == 0) {
+            return false;
+        }
         return userList.get(0).email.equals(emailInput) && userList.get(0).password.equals(passwordInput);
     }
 }
