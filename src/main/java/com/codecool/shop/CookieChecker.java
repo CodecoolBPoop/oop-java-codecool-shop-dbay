@@ -12,7 +12,7 @@ public class CookieChecker {
             user.username = "Not logged in!";
             return user;
         }
-        if (cookies.length == 0) {
+        if (cookies.length == 1 && cookies[0].getName().equals("JSESSIONID")) {
             user.username = "Not logged in!";
         } else {
             for (int i = 0; i < cookies.length; i++) {

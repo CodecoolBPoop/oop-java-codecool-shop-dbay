@@ -1,9 +1,7 @@
 
 function init() {
     initialiseDropdown();
-    //initialiseAddToCartBtn();
     initialiseCartNumber();
-    //wipeLocalStorage();
     registerButton();
     loginButton();
     loginAndRegister();

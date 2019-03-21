@@ -20,7 +20,7 @@ public class RegisterController extends HttpServlet {
 
         if (email != null && password != null && username != null) {
             RegisterDao registerDao = RegisterDaoDB.getInstance();
-            if (registerDao.getUser(email) == null) {
+            if (registerDao.getUser(email) == null || registerDao.getUser(email).size() == 0) {
                 registerDao.addUser(username,password,email);
                 Cookie usernameCookie = new Cookie("username", username);
                 usernameCookie.setMaxAge(60*60*24*365);
