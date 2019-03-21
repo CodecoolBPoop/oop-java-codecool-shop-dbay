@@ -1,19 +1,29 @@
 package com.codecool.shop.model;
 
 public class PersonalInfo {
+    private int id;
+
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
-
     public PersonalInfo() {
     }
 
     public PersonalInfo(String firstName, String lastName, String email, String phoneNumber) {
+        this.id = 0;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {

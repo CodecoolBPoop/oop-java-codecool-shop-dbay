@@ -25,9 +25,20 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
             return address;
         }
 
-        public void addAddress(Address address){}
+        public Address addAddress(Address address){
+            List<Object> values = new ArrayList<>();
+            values.add(address.getCountry());
+            values.add(address.getCity());
+            values.add(address.getZipcode());
+            values.add(address.getAddress());
+            return (Address) executeQuery("INSERT INTO addresses (country, city, zipcode, address) VALUES (?, ?, ?, ?) RETURNING *;", values).get(0);
+        }
 
-        public void deleteAddress(int addressID){}
+        public void deleteAddress(int addressID){
+            List<Object> values = new ArrayList<>();
+            values.add(addressID);
+            executeQuery("DELETE FROM addresses WHERE id=?;", values);
+        }
     }
 
     private class PersonalInfoDaoDB extends DaoDatabase {
@@ -43,7 +54,14 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
             return personalInfo;
         }
 
-        public void addPersonalInfo(PersonalInfo personalInfo){}
+        public PersonalInfo addPersonalInfo(PersonalInfo personalInfo){
+            List<Object> values = new ArrayList<>();
+            values.add(personalInfo.getFirstName());
+            values.add(personalInfo.getLastName());
+            values.add(personalInfo.getEmail());
+            values.add(personalInfo.getPhoneNumber());
+            return (PersonalInfo) executeQuery("INSERT INTO personal_info (\"firstName\", \"lastName\",  \"email\", \"phoneNumber\") VALUES (?, ?, ?, ?) RETURNING *;", values).get(0);
+        }
 
         public void deletePersonalInfo (int personalInfoID){}
     }
@@ -79,9 +97,9 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
         } catch (Exception e) {}
 
         if(order!=null){
-            shippingAddress = addressDaoDB.getAddress(order.getShippingAddressID());
-            billingAddress = addressDaoDB.getAddress(order.getBillingAddressID());
-            personalInfo = personalInfoDaoDB.getPersonalInfo(order.getPersonalInfoID());
+            shippingAddress = addressDaoDB.getAddress(order.getShippingAddressId());
+            billingAddress = addressDaoDB.getAddress(order.getBillingAddressId());
+            personalInfo = personalInfoDaoDB.getPersonalInfo(order.getPersonalInfoId());
 
             order.setBillingAddress(billingAddress);
             order.setShippingAddress(shippingAddress);
@@ -103,16 +121,16 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
             executeQuery("DELETE FROM personal_info WHERE \"sessionId\"=?", values);
             values.clear();
 
-            values.add(order.getShippingAddressID());
-            values.add(order.getBillingAddressID());
+            values.add(order.getShippingAddressId());
+            values.add(order.getBillingAddressId());
             executeQuery("DELETE FROM addresses WHERE id=? OR id=?", values);
             values.clear();
 
-            values.add(order.getCartID());
+            values.add(order.getCartId());
             executeQuery("DELETE FROM line_items WHERE \"cartId\"=?", values);
             values.clear();
 
-            values.add(order.getCartID());
+            values.add(order.getCartId());
             executeQuery("DELETE FROM shopping_carts WHERE id=?", values);
             values.clear();
 
@@ -128,14 +146,16 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
         AddressDaoDB addressDao = new AddressDaoDB();
         PersonalInfoDaoDB personalInfoDao = new PersonalInfoDaoDB();
 
-        addressDao.addAddress(order.getShippingAddress());
-        addressDao.addAddress(order.getBillingAddress());
-        personalInfoDao.addPersonalInfo(order.getPersonalInfo());
+        //Adds data to the database, which returns the actual state of the data(actual id assigned by the table),
+        //then sets the field so it will be the same in the object as it is in the DB
+        order.setShippingAddress(addressDao.addAddress(order.getShippingAddress()));
+        order.setBillingAddress(addressDao.addAddress(order.getBillingAddress()));
+        order.setPersonalInfo(personalInfoDao.addPersonalInfo(order.getPersonalInfo()));
 
-        values.add(order.getPersonalInfoID());
-        values.add(order.getShippingAddressID());
-        values.add(order.getBillingAddressID());
-        values.add(order.getCartID());
+        values.add(order.getPersonalInfoId());
+        values.add(order.getShippingAddressId());
+        values.add(order.getBillingAddressId());
+        values.add(order.getCartId());
         values.add(order.getSessionId());
         executeQuery("INSERT INTO Orders (\"personalInfoId\", \"shippingAddressId\", \"billingAddressId\", \"cartId\", \"sessionId\") VALUES (?, ?, ?, ?, ?)", values);
     }

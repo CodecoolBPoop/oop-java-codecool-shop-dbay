@@ -8,10 +8,10 @@ public class Order {
     private Address shippingAddress;
     private ShoppingCart cart;
 
-    private int personalInfoID;
-    private int billingAddressID;
-    private int shippingAddressID;
-    private int cartID;
+    private int personalInfoId;
+    private int billingAddressId;
+    private int shippingAddressId;
+    private int cartId;
 
     public Order() {
     }
@@ -19,9 +19,13 @@ public class Order {
     public Order(String sessionId, PersonalInfo personalInfo, ShoppingCart cart, Address billingAddress, Address shippingAddress) {
         this.sessionId = sessionId;
         this.personalInfo = personalInfo;
+        this.personalInfoId = personalInfo.getId();
         this.cart = cart;
+        this.cartId = cart.getId();
         this.billingAddress = billingAddress;
+        this.billingAddressId = billingAddress.getId();
         this.shippingAddress = shippingAddress;
+        this.shippingAddressId = shippingAddress.getId();
     }
 
     public int getId() {
@@ -32,36 +36,36 @@ public class Order {
         this.id = id;
     }
 
-    public int getPersonalInfoID() {
-        return personalInfoID;
+    public int getPersonalInfoId() {
+        return personalInfoId;
     }
 
-    public void setPersonalInfoID(int personalInfoID) {
-        this.personalInfoID = personalInfoID;
+    public void setPersonalInfoId(int personalInfoId) {
+        this.personalInfoId = personalInfoId;
     }
 
-    public int getBillingAddressID() {
-        return billingAddressID;
+    public int getBillingAddressId() {
+        return billingAddressId;
     }
 
-    public void setBillingAddressID(int billingAddressID) {
-        this.billingAddressID = billingAddressID;
+    public void setBillingAddressId(int billingAddressId) {
+        this.billingAddressId = billingAddressId;
     }
 
-    public int getShippingAddressID() {
-        return shippingAddressID;
+    public int getShippingAddressId() {
+        return shippingAddressId;
     }
 
-    public void setShippingAddressID(int shippingAddressID) {
-        this.shippingAddressID = shippingAddressID;
+    public void setShippingAddressId(int shippingAddressId) {
+        this.shippingAddressId = shippingAddressId;
     }
 
-    public int getCartID() {
-        return cartID;
+    public int getCartId() {
+        return cartId;
     }
 
-    public void setCartID(int cartID) {
-        this.cartID = cartID;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
     public PersonalInfo getPersonalInfo() {
@@ -70,6 +74,7 @@ public class Order {
 
     public void setPersonalInfo(PersonalInfo personalInfo) {
         this.personalInfo = personalInfo;
+        this.personalInfoId = personalInfo.getId();
     }
 
     public Address getBillingAddress() {
@@ -78,6 +83,7 @@ public class Order {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+        this.billingAddressId = billingAddress.getId();
     }
 
     public Address getShippingAddress() {
@@ -86,6 +92,7 @@ public class Order {
 
     public void setShippingAddress(Address shippingAddress) {
         this.shippingAddress = shippingAddress;
+        this.shippingAddressId = shippingAddress.getId();
     }
 
     public String getSessionId() {
@@ -102,5 +109,6 @@ public class Order {
 
     public void setCart(ShoppingCart cart) {
         this.cart = cart;
+        this.cartId = cart.getId();
     }
 }
