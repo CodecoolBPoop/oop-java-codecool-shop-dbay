@@ -1,14 +1,30 @@
 
 function init() {
     initialiseDropdown();
-    //initialiseAddToCartBtn();
-    //initialiseCartNumber();
-    //wipeLocalStorage();
     registerButton();
     loginButton();
     loginAndRegister();
+    logoutButton();
 }
-///// LOGIN/REGISTER /////
+
+///// LOGIN/REGISTER/LOGOUT /////
+function logoutButton() {
+    const btn = document.getElementById('logout');
+    btn.addEventListener('click', function () {
+        $.ajax({
+            method: "GET",
+            url: "/logout",
+            data: "logout"
+        })
+            .done(function() {
+                location.reload();
+            })
+            .fail(function(xhr, status, error) {
+                console.log(error);
+            });
+    })
+}
+
 function registerButton() {
     let btn = document.getElementsByClassName('btn-dark')[1];
     btn.addEventListener('click', function () {
@@ -46,8 +62,13 @@ function loginAndRegister() {
                 url: "/register",
                 data: { username: username, email: email, password:password }
             })
-                .done(function(msg) {
+                .done(function() {
                     location.reload();
+                })
+                .fail(function(xhr, status, error) {
+                    const alert = document.getElementById('alert-register');
+                    alert.classList.remove('display-off');
+                    alert.classList.add('display-on');
                 });
         } else {
             const email = document.getElementById('exampleInputEmail1').value;
@@ -59,6 +80,11 @@ function loginAndRegister() {
             })
                 .done(function() {
                     location.reload();
+                })
+                .fail(function(xhr, status, error) {
+                    const alert = document.getElementById('alert-login');
+                    alert.classList.remove('display-off');
+                    alert.classList.add('display-on');
                 });
         }
     })
@@ -73,11 +99,6 @@ function initialiseCartNumber() {
     if (number.textContent !== null) {
         number.textContent = window.localStorage.getItem("cartNumber");
     }
-}
-function wipeLocalStorage() {
-    window.localStorage.clear();
-    const number = document.getElementById("shopping-cart-number");
-    number.textContent = '';
 }
 
 ///// SHOPPING CART /////
@@ -102,36 +123,7 @@ function addQuantityToCart(btn) {
     let newNumber = Number(cartNumber.innerText) + Number(quantityNumber);
     window.localStorage.setItem('cartNumber', String(newNumber));
     cartNumber.innerText = window.localStorage.getItem('cartNumber');
-
-    // sendDataToServer(btn, quantityNumber);
 }
-//
-// function sendDataToServer(btn, quantity) {
-    // const price = btn.parentElement.closest('div').previousElementSibling.firstElementChild.textContent;
-//     const name = btn.parentElement.closest('div').previousElementSibling.parentElement.previousElementSibling.firstElementChild.textContent;
-//     const cookie = document.cookie;
-//     console.log(cookie.substring(11));
-//     console.log(cookie.substring(11, 42));
-//     // let xhr = new XMLHttpRequest();
-//     // xhr.open("POST", '/shopping-cart', true);
-//     // xhr.setRequestHeader('Content-Type', 'application/json');
-//     // xhr.send(JSON.stringify({
-//     //     addProduct: btn.dataset.id,
-//     //     sessionId: cookie.substring(11, 42)
-//     // }));
-//     // event.stopPropagation();
-//     fetch("/shopping-cart", {
-//         method: "POST",
-//         headers: {
-//             "Accept": "application/json",
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//             addProduct: btn.dataset.id}),
-//         credentials: "same-origin"
-//     })
-// }
-
 
 ///// DROPDOWN /////
 function initialiseDropdown() {

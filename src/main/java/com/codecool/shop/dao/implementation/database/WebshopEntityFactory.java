@@ -23,6 +23,7 @@ public class WebshopEntityFactory {
             case "com.codecool.shop.dao.implementation.database.ShoppingCartDaoDB$LineItemDaoDB":
                 return new LineItem();
             case "com.codecool.shop.dao.implementation.database.LoginDaoDB":
+            case "com.codecool.shop.dao.implementation.database.RegisterDaoDB":
                 return new User();
             default:
                 return null;

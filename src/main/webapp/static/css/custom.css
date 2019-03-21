@@ -177,6 +177,9 @@ option, option:hover {
     font-weight: bold;
     font-size: 16px;
 }
+.modal {
+    z-index: 10000;
+}
 #navbar {
     font-size: 18px;
     z-index: 9999;
