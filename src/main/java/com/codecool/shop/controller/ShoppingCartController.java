@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.database.ShoppingCartDaoDB;
 import com.codecool.shop.dao.implementation.memory.ShoppingCartDaoMem;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -21,7 +22,7 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoDB.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -44,7 +45,7 @@ public class ShoppingCartController extends HttpServlet {
 //        int cartId = Integer.parseInt(req.getParameter("addProduct"));
         HttpSession session = req.getSession(true);
         String sessionId = session.getId();
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoDB.getInstance();
 //        ProductDao productStore = ProductDaoMem.getInstance();
         shoppingCartDataStore.getShoppingCart(sessionId);
 

@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.database.ShoppingCartDaoDB;
 import com.codecool.shop.dao.implementation.memory.OrderDaoMem;
 import com.codecool.shop.dao.implementation.memory.ShoppingCartDaoMem;
 import com.codecool.shop.model.Address;
@@ -41,7 +42,7 @@ public class OrderController extends HttpServlet {
 
     private void registerOrder(String sessionId, JSONObject jsonObject) {
         OrderDao orders = OrderDaoMem.getInstance();
-        ShoppingCartDao carts = ShoppingCartDaoMem.getInstance();
+        ShoppingCartDao carts = ShoppingCartDaoDB.getInstance();
         //Getting the personal info out of the jsonObject
         JSONObject personalInfo = (JSONObject) jsonObject.get("personalInfo");
         String firstName = (String) personalInfo.get("firstName");

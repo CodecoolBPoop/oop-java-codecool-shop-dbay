@@ -3,6 +3,8 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.database.ProductCategoryDaoDB;
+import com.codecool.shop.dao.implementation.database.ProductDaoDB;
 import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import org.thymeleaf.TemplateEngine;
@@ -20,8 +22,8 @@ public class CategoryController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoDB.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoDB.getInstance();
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));

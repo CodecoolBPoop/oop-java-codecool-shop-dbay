@@ -37,7 +37,7 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
             values.add(personalInfoID);
 
             try{
-                personalInfo = (PersonalInfo) executeQuery("SELECT * FROM personal_info WHERE id=?;", values);
+                personalInfo = (PersonalInfo) executeQuery("SELECT * FROM personal_info WHERE id=?;", values).get(0);
             } catch (Exception e) {}
 
             return personalInfo;
@@ -75,7 +75,7 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
         values.add(sessionId);
 
         try {
-            order = (Order) executeQuery("SELECT * FROM orders WHERE sessionID = ?", values).get(0);
+            order = (Order) executeQuery("SELECT * FROM orders WHERE \"sessionId\" = ?", values).get(0);
         } catch (Exception e) {}
 
         if(order!=null){
@@ -100,7 +100,7 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
             List<Object> values = new ArrayList<>();
 
             values.add(sessionId);
-            executeQuery("DELETE FROM personal_info WHERE sessionid=?", values);
+            executeQuery("DELETE FROM personal_info WHERE \"sessionId\"=?", values);
             values.clear();
 
             values.add(order.getShippingAddressID());
@@ -109,7 +109,7 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
             values.clear();
 
             values.add(order.getCartID());
-            executeQuery("DELETE FROM line_items WHERE cartId=?", values);
+            executeQuery("DELETE FROM line_items WHERE \"cartId\"=?", values);
             values.clear();
 
             values.add(order.getCartID());
@@ -117,7 +117,7 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
             values.clear();
 
             values.add(sessionId);
-            executeQuery("DELETE FROM Orders WHERE sessionid=?", values);
+            executeQuery("DELETE FROM Orders WHERE \"sessionId\"=?", values);
         }
     }
 
@@ -137,7 +137,7 @@ public class OrderDaoDB extends DaoDatabase implements OrderDao {
         values.add(order.getBillingAddressID());
         values.add(order.getCartID());
         values.add(order.getSessionId());
-        executeQuery("INSERT INTO Orders (personalInfoId, shippingAddressId, billingAddressId, cartId, sessionId) VALUES (?, ?, ?, ?, ?)", values);
+        executeQuery("INSERT INTO Orders (\"personalInfoId\", \"shippingAddressId\", \"billingAddressId\", \"cartId\", \"sessionId\") VALUES (?, ?, ?, ?, ?)", values);
     }
 
     @Override
