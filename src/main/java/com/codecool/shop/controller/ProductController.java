@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.CookieChecker;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.database.ProductCategoryDaoDB;
@@ -10,15 +11,13 @@ import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.memory.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +37,10 @@ public class ProductController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         String[] categoriesArray = {"Crossovers", "Hatchbacks", "Sedans", "Convertibles", "Vans", "Trucks", "Minivans", "Sport cars"};
 
+        //// CHECK USER ////
+        Cookie[] cookie = req.getCookies();
+        User user = CookieChecker.checkUser(cookie);
+
         // Get elements for the dropdown list.
         List<Product> allProducts = productDataStore.getAll();
         ArrayList<String> dropdownElements = getDropdownElements(style, allProducts);
@@ -49,6 +52,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("style", style);
         context.setVariable("categoriesArray", categoriesArray);
         context.setVariable("dropdown", dropdownElements);
+        context.setVariable("userName", user.username);
         engine.process("product/index.html", context, resp.getWriter());
     }
 

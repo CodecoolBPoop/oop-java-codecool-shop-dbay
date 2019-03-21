@@ -18,7 +18,6 @@ public abstract class DaoDatabase {
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             setQueryValues(statement, parameters);
-
             hasResult = statement.execute();
 
             if (hasResult) {
@@ -47,7 +46,6 @@ public abstract class DaoDatabase {
         while (resultSet.next()) {
             Object obj = WebshopEntityFactory.getInstanceOfWebshopEntity(this.getClass());
             List<Field> fields = getEveryField(obj);
-
             for (Field field : fields) {
                 boolean accessible = field.isAccessible();
                 field.setAccessible(true);
@@ -76,7 +74,6 @@ public abstract class DaoDatabase {
 
             webshopEntityList.add(obj);
         }
-
         return webshopEntityList;
     }
 
