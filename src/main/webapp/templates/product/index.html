@@ -65,12 +65,12 @@
             <a class="navbar-link" th:case="'Not logged in!'" href="#" data-toggle="modal" data-target="#exampleModalCenter">
                 <span class="navbar-label">Cart</span>
                 <i class="fas fa-shopping-cart"></i>
-                <span class="badge badge-danger">11</span>
+                <span class="badge badge-danger">0</span>
             </a>
             <a class="navbar-link" th:case="*" href="/shopping-cart">
                 <span class="navbar-label">Cart</span>
                 <i class="fas fa-shopping-cart"></i>
-                <span class="badge badge-danger">11</span>
+                <span class="badge badge-danger" id="shopping-cart-size">0</span>
             </a>
         </li>
     </ul>

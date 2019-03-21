@@ -2,7 +2,7 @@
 function init() {
     initialiseDropdown();
     //initialiseAddToCartBtn();
-    //initialiseCartNumber();
+    initialiseCartNumber();
     //wipeLocalStorage();
     registerButton();
     loginButton();
@@ -66,18 +66,25 @@ function loginAndRegister() {
 
 ///// CARD NUMBER /////
 function initialiseCartNumber() {
-    const number = document.getElementById("shopping-cart-number");
-    if (window.localStorage.getItem("cartNumber") === null) {
-        window.localStorage.setItem("cartNumber", "");
-    }
-    if (number.textContent !== null) {
-        number.textContent = window.localStorage.getItem("cartNumber");
-    }
+    window.addEventListener("load", getShoppingCartSize);
 }
-function wipeLocalStorage() {
-    window.localStorage.clear();
-    const number = document.getElementById("shopping-cart-number");
-    number.textContent = '';
+
+function getShoppingCartSize(){
+    fetch("/shopping-cart-size", {
+        method: "POST",
+        mode: "same-origin",
+        cache: "default",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => response.json())
+        .then(response => showCartSize(response.cartSize))
+}
+
+function showCartSize(shoppingCartSize){
+    document.getElementById("shopping-cart-size").innerText = shoppingCartSize;
 }
 
 ///// SHOPPING CART /////

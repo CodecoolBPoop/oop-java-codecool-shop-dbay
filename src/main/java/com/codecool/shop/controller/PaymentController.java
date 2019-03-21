@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.implementation.database.OrderDaoDB;
 import com.codecool.shop.dao.implementation.memory.OrderDaoMem;
 import com.codecool.shop.model.Order;
 import org.thymeleaf.TemplateEngine;
@@ -21,7 +22,7 @@ public class PaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
+        OrderDao orderDataStore = OrderDaoDB.getInstance();
         HttpSession session = request.getSession(true);
         String sessionId = session.getId();
         Order order = orderDataStore.getOrder(sessionId);
