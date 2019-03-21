@@ -15,7 +15,11 @@ public class CookieChecker {
         if (cookies.length == 0) {
             user.username = "Not logged in!";
         } else {
-            user.username = cookies[0].getValue();
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("username")) {
+                    user.username = cookies[i].getValue();
+                }
+            }
         }
         return user;
     }
